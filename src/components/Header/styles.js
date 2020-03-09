@@ -44,10 +44,16 @@ export const Container = styled.div`
 
           a {
             color: #999;
-          }
+            transition: opacity 0.2s;
 
-          a.selected {
-            color: #444;
+            &:not(.selected):hover {
+              /* Melhor seria se fosse um darken */
+              opacity: 0.8;
+            }
+
+            &.selected {
+              color: #444;
+            }
           }
         }
       }
