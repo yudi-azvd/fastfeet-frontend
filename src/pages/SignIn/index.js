@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 
@@ -6,11 +7,16 @@ import logo from '../../assets/fastfeet-logo.png';
 
 import Input from '../../components/Input';
 
+import { signInRequest } from '../../store/modules/auth/actions';
+
 // import api from '../../services/api';
 
 export default function SignIn() {
-  function handleSubmit(data) {
-    console.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
 
   return (
@@ -39,6 +45,8 @@ export default function SignIn() {
         </label>
 
         <button type="submit">Entrar</button>
+
+        {loading ? 'carregando' : ''}
 
         <Link to="/register">Criar conta</Link>
       </Form>

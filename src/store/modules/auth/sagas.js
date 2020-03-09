@@ -1,8 +1,8 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import api from '~/services/api';
-import history from '~/services/history';
+import api from '../../../services/api';
+import history from '../../../services/history';
 
 import { signInSuccess, signFailure } from './actions';
 
@@ -17,19 +17,15 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (!user.provider) {
-      toast.error('usuário não é prestador de serviços');
-    }
-
     /**
      * A partir de agora, toda requisição à API vai
-     * enviar o token JWT
+     * enviar o token
      */
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    history.push('/deliveries');
   } catch (error) {
     toast.error('Falha na autenticação, verifique seus dados');
     yield put(signFailure());
