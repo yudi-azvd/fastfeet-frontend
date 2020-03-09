@@ -1,19 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Form } from '@unform/web';
 
 import logo from '../../assets/fastfeet-logo.png';
 
-import api from '../../services/api';
+import Input from '../../components/Input';
+
+// import api from '../../services/api';
 
 export default function SignIn() {
+  function handleSubmit(data) {
+    console.log(data);
+  }
+
   return (
     <>
       <img src={logo} alt="FastFeet logo" />
 
-      <form>
+      <Form onSubmit={handleSubmit}>
         <label htmlFor="email">
           SEU E-MAIL
-          <input
+          <Input
             type="email"
             name="email"
             id="email"
@@ -23,7 +30,7 @@ export default function SignIn() {
 
         <label htmlFor="password">
           SUA SENHA
-          <input
+          <Input
             type="password"
             name="password"
             id="password"
@@ -34,7 +41,7 @@ export default function SignIn() {
         <button type="submit">Entrar</button>
 
         <Link to="/register">Criar conta</Link>
-      </form>
+      </Form>
     </>
   );
 }
