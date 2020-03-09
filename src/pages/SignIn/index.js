@@ -6,10 +6,9 @@ import { Form } from '@unform/web';
 import logo from '../../assets/fastfeet-logo.png';
 
 import Input from '../../components/Input';
+import SubmitButton from '../../components/SubmitButton';
 
 import { signInRequest } from '../../store/modules/auth/actions';
-
-// import api from '../../services/api';
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -44,10 +43,8 @@ export default function SignIn() {
           />
         </label>
 
-        <button type="submit">Entrar</button>
-
-        {loading ? 'carregando' : ''}
-
+        {/* <button type="submit"> {loading ? 'carregando...' : 'Entrar'} </button> */}
+        <SubmitButton label="Entrar" loading={loading} />
         <Link to="/register">Criar conta</Link>
       </Form>
     </>
