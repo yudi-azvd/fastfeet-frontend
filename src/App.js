@@ -1,14 +1,17 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
+
+import Routes from './routes';
+import history from './services/history';
+
+import GlobalStyle from './styles/global';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Router history={history}>
+      <Routes />
+      <GlobalStyle />
+    </Router>
   );
 }
 
