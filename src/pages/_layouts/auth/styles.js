@@ -57,12 +57,23 @@ export const Content = styled.div`
       height: 45px;
       border: 0;
       border-radius: 4px;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
 
       transition: background 0.2s;
 
       &:hover {
         background: ${darken(0.05, '#7d40e7')};
+      }
+    }
+
+    a {
+      color: #7d40e7;
+      font-size: 16px;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
       }
     }
   }

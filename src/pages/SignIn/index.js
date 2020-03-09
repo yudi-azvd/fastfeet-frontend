@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import bigLogo from '../../assets/fastfeet-logo.png';
-// import { Container } from './styles';
+import logo from '../../assets/fastfeet-logo.png';
+
+import api from '../../services/api';
 
 export default function SignIn() {
   return (
     <>
-      <img src={bigLogo} alt="FastFeet logo" />
+      <img src={logo} alt="FastFeet logo" />
 
       <form>
         <label htmlFor="email">
-          SEU E-MAIL{' '}
+          SEU E-MAIL
           <input
             type="email"
             name="email"
@@ -20,7 +22,7 @@ export default function SignIn() {
         </label>
 
         <label htmlFor="password">
-          SUA SENHA{' '}
+          SUA SENHA
           <input
             type="password"
             name="password"
@@ -30,6 +32,8 @@ export default function SignIn() {
         </label>
 
         <button type="submit">Entrar</button>
+
+        <Link to="/register">Criar conta</Link>
       </form>
     </>
   );
