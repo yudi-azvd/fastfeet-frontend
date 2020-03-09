@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #fff;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   height: 64px;
   padding-left: 30px;
+  padding-right: 30px;
+  background: #fff;
 
   nav {
     display: flex;
@@ -48,6 +51,21 @@ export const Container = styled.div`
           }
         }
       }
+    }
+  }
+
+  aside {
+    strong {
+      display: block;
+      color: #666;
+    }
+
+    button {
+      background: #fff;
+      padding: 0;
+      display: inline-block;
+      border: 0;
+      color: #de3b3b;
     }
   }
 `;

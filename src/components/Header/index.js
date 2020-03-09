@@ -1,10 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 import logo from '../../assets/fastfeet-logo.png';
 import { Container } from './styles';
 
 export default function Header() {
+  const name = useSelector(state => state.user.profile.name);
+
+  function handleSignOut() {}
+
   return (
     <Container>
       <nav>
@@ -38,7 +43,13 @@ export default function Header() {
         </div>
       </nav>
 
-      <aside>profile</aside>
+      <aside>
+        <strong>{name}</strong>
+
+        <button type="button" onClick={handleSignOut}>
+          sair do sistema
+        </button>
+      </aside>
     </Container>
   );
 }
