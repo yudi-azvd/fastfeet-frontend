@@ -8,8 +8,28 @@ export default function SignIn() {
     <>
       <img src={bigLogo} alt="FastFeet logo" />
 
-      <form action="">
-        <input type="text" name="name" id="name" />
+      <form>
+        <label htmlFor="email">
+          SEU E-MAIL{' '}
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="exemplo@email.com"
+          />
+        </label>
+
+        <label htmlFor="password">
+          SUA SENHA{' '}
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="********"
+          />
+        </label>
+
+        <button type="submit">Entrar</button>
       </form>
     </>
   );
