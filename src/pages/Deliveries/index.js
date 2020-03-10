@@ -5,6 +5,8 @@ import api from '../../services/api';
 
 import { Container, DeliveriesList } from './styles';
 
+import CreateButton from '../../components/CreateButton';
+
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
 
@@ -24,7 +26,8 @@ export default function Deliveries() {
 
       <div>
         <input type="text" placeholder="Buscar por encomendas" />
-        <button type="button">CADASTRAR</button>
+        {/* <button type="button">CADASTRAR</button> */}
+        <CreateButton />
       </div>
 
       <DeliveriesList>
