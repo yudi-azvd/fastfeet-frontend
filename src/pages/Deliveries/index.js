@@ -58,11 +58,7 @@ export default function Deliveries() {
               <div> status</div>
               <div className="actions">
                 {/* <button type="button"> */}
-                <FiMoreHorizontal
-                  onClick={() => console.log('actions')}
-                  size={16}
-                  color="#666"
-                />
+                <FiMoreHorizontal size={16} color="#666" />
                 {/* </button> */}
               </div>
             </li>
