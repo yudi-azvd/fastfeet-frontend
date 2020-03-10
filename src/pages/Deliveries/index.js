@@ -6,6 +6,16 @@ import api from '../../services/api';
 import { Container, DeliveriesList } from './styles';
 
 import CreateButton from '../../components/CreateButton';
+import DefaultAvatar from '../../components/DefaultAvatar';
+
+const colors = [
+  '#A28FD0',
+  '#CB946C',
+  '#83CEC9',
+  '#CC7584',
+  '#A8D080',
+  '#CCCC8B',
+];
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
@@ -41,15 +51,22 @@ export default function Deliveries() {
         </div>
 
         <ul>
-          {deliveries.map(d => (
+          {deliveries.map((d, index) => (
             <li className="row" key={`delivery-${d.id}`}>
               <div> #{d.id} </div>
               <div> {d.recipient.name} </div>
               <div className="avatar">
-                <img
-                  src="https://api.adorable.io/avatars/40/abott@adorable.png"
-                  alt="imagem de perfil"
-                />
+                {d.deliveryman.avatar ? (
+                  <img
+                    src="https://api.adorable.io/avatars/40/abott@adorable.png"
+                    alt="imagem de perfil"
+                  />
+                ) : (
+                  <DefaultAvatar
+                    initials={d.deliveryman.name[0]}
+                    color={colors[index % colors.length]}
+                  />
+                )}
                 <span>{d.deliveryman.name}</span>
               </div>
               <div> {d.recipient.city} </div>
@@ -57,9 +74,7 @@ export default function Deliveries() {
               {/* status é calculado! */}
               <div> status</div>
               <div className="actions">
-                {/* <button type="button"> */}
                 <FiMoreHorizontal size={16} color="#666" />
-                {/* </button> */}
               </div>
             </li>
           ))}
