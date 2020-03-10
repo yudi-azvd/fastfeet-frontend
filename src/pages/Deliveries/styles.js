@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`
   margin: 30px 120px;
@@ -23,12 +22,6 @@ export const Container = styled.div`
       border: 1px solid #ddd;
       color: #ddd;
       border-radius: 4px;
-    }
-
-    button {
-      /* TEMPORÁRIO ENQT NÃO HÁ COPNNT */
-      background: purple;
-      color: white;
     }
   }
 `;
@@ -81,7 +74,17 @@ export const DeliveriesList = styled.div`
       div.avatar {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: left;
+
+        span.default-avatar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          margin-right: 5px;
+        }
 
         img {
           width: 35px;
