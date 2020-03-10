@@ -39,6 +39,7 @@ export const DeliveriesList = styled.div`
 
   div.row {
     margin-bottom: 14px;
+    font-weight: 16px;
     font-weight: bold;
     color: #444;
 

@@ -26,8 +26,7 @@ export default function Deliveries() {
 
       <div>
         <input type="text" placeholder="Buscar por encomendas" />
-        {/* <button type="button">CADASTRAR</button> */}
-        <CreateButton />
+        <CreateButton link="/deliveries/new" />
       </div>
 
       <DeliveriesList>

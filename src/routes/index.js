@@ -16,6 +16,7 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/deliveries" component={Deliveries} isPrivate />
+      <Route path="/deliveries/new" component={Deliveries} isPrivate />
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} />
