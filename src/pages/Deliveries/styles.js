@@ -94,6 +94,12 @@ export const DeliveriesList = styled.div`
         }
       }
 
+      div.status {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+      }
+
       div.actions {
         display: flex;
         justify-content: flex-end;

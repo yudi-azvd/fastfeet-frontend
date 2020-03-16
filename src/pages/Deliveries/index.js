@@ -7,6 +7,7 @@ import { Container, DeliveriesList } from './styles';
 
 import CreateButton from '../../components/CreateButton';
 import DefaultAvatar from '../../components/DefaultAvatar';
+import DeliveryStatus from '../../components/DeliveryStatus';
 
 const colors = [
   '#A28FD0',
@@ -24,7 +25,14 @@ export default function Deliveries() {
     async function loadDeliveries() {
       const response = await api.get('/deliveries');
 
-      setDeliveries(response.data);
+      setDeliveries(
+        response.data.map(delivery => ({
+          ...delivery,
+          formattedStartDate: 'a',
+          formattedEndDate: 'b',
+          formattedCanceledAt: 'c',
+        }))
+      );
     }
 
     loadDeliveries();
@@ -57,7 +65,7 @@ export default function Deliveries() {
               <div> {d.recipient.name} </div>
               <div className="avatar">
                 {d.deliveryman.avatar ? (
-                  <img
+                  <img // aí vem a URL do avatar
                     src="https://api.adorable.io/avatars/40/abott@adorable.png"
                     alt="imagem de perfil"
                   />
@@ -71,8 +79,9 @@ export default function Deliveries() {
               </div>
               <div> {d.recipient.city} </div>
               <div> {d.recipient.state} </div>
-              {/* status é calculado! */}
-              <div> status</div>
+              <div className="status">
+                <DeliveryStatus delivery={d} />
+              </div>
               <div className="actions">
                 <FiMoreHorizontal size={16} color="#666" />
               </div>
