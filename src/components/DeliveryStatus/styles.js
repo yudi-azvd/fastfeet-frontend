@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, transparentize } from 'polished';
 
 export const StatusContainer = styled.div`
   position: relative;
@@ -7,11 +7,12 @@ export const StatusContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 25px;
-  background: ${props => lighten(0.5, props.color)};
+  border-radius: 4px;
+  background: ${props => transparentize(0.8, props.color)};
 
-  &::before {
+  /* &::before {
     position: relative;
-    /* left: 50%; */
+    left: 50%;
     content: '';
     display: inline-block;
     height: 25px;
@@ -19,11 +20,11 @@ export const StatusContainer = styled.div`
     background: ${props => lighten(0.5, props.color)};
     background: blue;
     border-radius: 50%;
-  }
+  } */
 
-  &::after {
+  /* &::after {
     position: relative;
-    /* left: 10px; */
+    left: 10px;
     content: '';
     display: inline-block;
     height: 25px;
@@ -31,7 +32,7 @@ export const StatusContainer = styled.div`
     background: ${props => lighten(0.5, props.color)};
     background: red;
     border-radius: 50%;
-  }
+  } */
 
   span::before {
     content: '';
