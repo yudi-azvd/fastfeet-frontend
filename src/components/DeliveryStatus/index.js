@@ -14,7 +14,7 @@ const colorMap = {
 export default function DeliveryStatus({ delivery }) {
   // PRECISA DE REFATORAÇÃO
   // a ordem importa aqui
-  // TYPO: _canceled_ em todo esse arquivo
+  // TYPO: _canceled_ em todo esse arquivo. Correto é _cancelled_
   const status = useMemo(() => {
     if (delivery.canceledAt) {
       return 'cancelada';
