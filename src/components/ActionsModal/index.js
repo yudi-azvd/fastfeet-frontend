@@ -1,7 +1,17 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { ModalContainer } from './styles';
 
 export default function ActionsModal() {
-  return <div />;
+  return (
+    <>
+      <ModalContainer>
+        <ul>
+          <li>visualizar</li>
+          <li>editar</li>
+          <li>excluir</li>
+        </ul>
+      </ModalContainer>
+    </>
+  );
 }
