@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import searchSvg from '../../assets/search.svg';
+
 export const Container = styled.div`
   margin: 30px 120px;
 
@@ -14,14 +16,19 @@ export const Container = styled.div`
     justify-content: space-between;
 
     input {
-      /* background: #fff url('../assets/search.svg') no-repeat 190px center; */
+      background: #fff url(${searchSvg}) no-repeat 16px center;
+      background-size: 16px 16px;
       margin-bottom: 22px;
-      padding-left: 16px;
+      padding-left: 40px;
       width: 237px;
       height: 36px;
       border: 1px solid #ddd;
-      color: #ddd;
+      color: #999;
       border-radius: 4px;
+
+      &::placeholder {
+        color: #999;
+      }
     }
   }
 `;

@@ -20,10 +20,15 @@ const colors = [
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
+  const [productQuery, setProductQuery] = useState('');
 
   useEffect(() => {
     async function loadDeliveries() {
-      const response = await api.get('/deliveries');
+      const response = await api.get('/deliveries', {
+        params: {
+          q: productQuery,
+        },
+      });
 
       setDeliveries(
         response.data.map(delivery => ({
@@ -36,14 +41,23 @@ export default function Deliveries() {
     }
 
     loadDeliveries();
-  }, []);
+  }, [productQuery]);
+
+  function handleProductQueryChange(event) {
+    setProductQuery(event.target.value);
+  }
 
   return (
     <Container>
       <h1>Gerenciando encomendas</h1>
 
       <div>
-        <input type="text" placeholder="Buscar por encomendas" />
+        <input
+          type="text"
+          placeholder="Buscar por encomendas"
+          value={productQuery}
+          onChange={handleProductQueryChange}
+        />
         <CreateButton link="/deliveries/new" />
       </div>
 
