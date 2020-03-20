@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { IoMdEye } from 'react-icons/io';
+import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import api from '../../services/api';
 
-import { Container, DeliveriesList } from './styles';
+import {
+  Container,
+  DeliveriesList,
+  ActionsDropdown,
+  DeliveryItem,
+} from './styles';
 
 import CreateButton from '../../components/CreateButton';
 import DefaultAvatar from '../../components/DefaultAvatar';
 import DeliveryStatus from '../../components/DeliveryStatus';
+// import ActionsModal from '../../components/ActionsModal';
 
 const colors = [
   '#A28FD0',
@@ -21,6 +29,7 @@ const colors = [
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [productQuery, setProductQuery] = useState('');
+  const [openDeliveryActionsId, setOpenDeliveryActionsId] = useState(104);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -47,6 +56,14 @@ export default function Deliveries() {
     setProductQuery(event.target.value);
   }
 
+  function toggleActionsModalVisibility(delivery) {
+    if (delivery.id === openDeliveryActionsId) {
+      setOpenDeliveryActionsId(0);
+    } else {
+      setOpenDeliveryActionsId(delivery.id);
+    }
+  }
+
   return (
     <Container>
       <h1>Gerenciando encomendas</h1>
@@ -62,10 +79,10 @@ export default function Deliveries() {
       </div>
 
       <DeliveriesList>
-        <div className="row">
+        <div className="header">
           <div>ID</div>
           <div>Destinatário</div>
-          <div>Recipiente</div>
+          <div>Entregador</div>
           <div>Cidade</div>
           <div>Estado</div>
           <div>Status</div>
@@ -74,7 +91,7 @@ export default function Deliveries() {
 
         <ul>
           {deliveries.map((d, index) => (
-            <li className="row" key={`delivery-${d.id}`}>
+            <DeliveryItem key={`delivery-${d.id}`}>
               <div> #{d.id} </div>
               <div> {d.recipient.name} </div>
               <div className="avatar">
@@ -97,9 +114,28 @@ export default function Deliveries() {
                 <DeliveryStatus delivery={d} />
               </div>
               <div className="actions">
-                <FiMoreHorizontal size={16} color="#666" />
+                <div className="dropdown">
+                  <FiMoreHorizontal
+                    size={16}
+                    color="#666"
+                    onClick={() => toggleActionsModalVisibility(d)}
+                  />
+                  <ActionsDropdown open={d.id === openDeliveryActionsId}>
+                    <li>
+                      <IoMdEye size={15} color="#8E5BE8" />
+                      <span>Visualizar</span>
+                    </li>
+                    <li>
+                      <MdEdit size={16} color="#4D85EE" /> <span>Editar</span>
+                    </li>
+                    <li>
+                      <MdDeleteForever size={16} color="#DE3B3B" />
+                      <span>Excluir</span>
+                    </li>
+                  </ActionsDropdown>
+                </div>
               </div>
-            </li>
+            </DeliveryItem>
           ))}
         </ul>
       </DeliveriesList>
