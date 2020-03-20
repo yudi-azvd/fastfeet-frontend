@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { IoMdEye } from 'react-icons/io';
@@ -64,6 +66,10 @@ export default function Deliveries() {
     }
   }
 
+  function handleView(delivery) {}
+  function handleEdit(deliveryId) {}
+  function handleDelete(deliveryId) {}
+
   return (
     <Container>
       <h1>Gerenciando encomendas</h1>
@@ -121,14 +127,14 @@ export default function Deliveries() {
                     onClick={() => toggleActionsModalVisibility(d)}
                   />
                   <ActionsDropdown open={d.id === openDeliveryActionsId}>
-                    <li>
+                    <li onClick={() => handleView(d)}>
                       <IoMdEye size={15} color="#8E5BE8" />
                       <span>Visualizar</span>
                     </li>
-                    <li>
+                    <li onClick={() => handleEdit(d.id)}>
                       <MdEdit size={16} color="#4D85EE" /> <span>Editar</span>
                     </li>
-                    <li>
+                    <li onClick={() => handleDelete(d.id)}>
                       <MdDeleteForever size={16} color="#DE3B3B" />
                       <span>Excluir</span>
                     </li>

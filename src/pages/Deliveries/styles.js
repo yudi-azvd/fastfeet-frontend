@@ -140,7 +140,7 @@ export const ActionsDropdown = styled.ul`
 
   li {
     cursor: pointer;
-    padding: 6px 0;
+    padding: 8px 0;
     display: flex;
     align-items: center;
     line-height: 100%;
@@ -168,7 +168,7 @@ export const ActionsDropdown = styled.ul`
     }
 
     &:hover span {
-      color: ${darken(0.1, '#999999')};
+      color: ${darken(0.2, '#999999')};
     }
   }
 `;
