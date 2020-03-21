@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-export const Container = styled.div`
+export const Container = styled.ul`
   padding: 10px;
   width: 150px;
   border-radius: 4px;
