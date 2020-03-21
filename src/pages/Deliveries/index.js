@@ -97,6 +97,7 @@ export default function Deliveries() {
 
         <ul>
           {deliveries.map((d, index) => (
+            // https://dmitripavlutin.com/use-react-memo-wisely/
             <DeliveryItem key={`delivery-${d.id}`}>
               <div> #{d.id} </div>
               <div> {d.recipient.name} </div>
