@@ -7,17 +7,12 @@ import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import api from '../../services/api';
 
-import {
-  Container,
-  DeliveriesList,
-  ActionsDropdown,
-  DeliveryItem,
-} from './styles';
+import { Container, DeliveriesList, DeliveryItem } from './styles';
 
 import CreateButton from '../../components/CreateButton';
 import DefaultAvatar from '../../components/DefaultAvatar';
 import DeliveryStatus from '../../components/DeliveryStatus';
-// import ActionsModal from '../../components/ActionsModal';
+import ActionsDropdown from '../../components/ActionsDropdown';
 
 const colors = [
   '#A28FD0',
@@ -31,7 +26,7 @@ const colors = [
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [productQuery, setProductQuery] = useState('');
-  const [openDeliveryActionsId, setOpenDeliveryActionsId] = useState(104);
+  const [openDeliveryActionsId, setOpenDeliveryActionsId] = useState(0);
 
   useEffect(() => {
     async function loadDeliveries() {
