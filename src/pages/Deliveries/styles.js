@@ -60,6 +60,7 @@ export const DeliveriesList = styled.div`
   }
 `;
 
+// https://dmitripavlutin.com/use-react-memo-wisely/
 export const DeliveryItem = memo(styled.li`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -108,14 +109,13 @@ export const DeliveryItem = memo(styled.li`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    position: relative;
 
     div.dropdown {
       display: flex;
-      /* flex-direction: column;
+      flex-direction: column;
       justify-content: center;
-      align-items: center; */
-      /* position: relative; */
+      align-items: center;
+      position: relative;
     }
 
     svg {
@@ -126,17 +126,32 @@ export const DeliveryItem = memo(styled.li`
 
 export const ActionsDropdown = styled.ul`
   padding: 10px;
-  width: 120px;
+  width: 150px;
   border-radius: 4px;
   box-shadow: 0 0 2px #00000026;
+  /* igual a: */
+  /* box-shadow: 0 0 2px rgba(0, 0, 0, 0.15); */
   background: #fff;
   font-size: 16px;
 
   display: ${props => (props.open ? 'block' : 'none')};
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 4;
+  top: calc(100% + 14px);
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(50% - 4.5px);
+    top: -7px;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    border-left: 4.5px solid transparent;
+    border-right: 4.5px solid transparent;
+    border-bottom: 7px solid #fff;
+    filter: drop-shadow(0px -3px 2px rgba(0, 0, 0, 0.15));
+  }
 
   li {
     cursor: pointer;
