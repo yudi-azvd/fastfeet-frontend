@@ -3,16 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div.attrs({
   id: 'modal-container',
 })`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
+  display: ${props => (props.open ? 'block' : 'none')};
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 5;
+  z-index: 10;
 
-  div.modal-content {
+  div.modal-component-content {
     position: absolute;
     /* top e bottom precisam estar deifinidos 
     pra que uma altura esteja definida (?). 
