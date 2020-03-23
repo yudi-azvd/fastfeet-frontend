@@ -5,7 +5,7 @@ import { Container } from './styles';
 
 export default function BasicModal({ open, children, className }) {
   return (
-    <Container className={`${className}modal-component-container`} open={open}>
+    <Container className={`${className} modal-component-container`} open={open}>
       <div className="modal-component-content">{children}</div>
     </Container>
   );

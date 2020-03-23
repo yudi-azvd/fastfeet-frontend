@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div.attrs({
-  id: 'modal-container',
-})`
+export const Container = styled.div`
   display: ${props => (props.open ? 'block' : 'none')};
   position: fixed;
   top: 0;
