@@ -29,6 +29,6 @@ export const Container = styled.div.attrs({
     margin: 238px auto;
     width: 450px;
     min-height: 253px;
-    padding: 25px;
+    padding: 30px;
   }
 `;
