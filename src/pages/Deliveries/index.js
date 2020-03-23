@@ -149,8 +149,6 @@ export default function Deliveries() {
         </DeliveriesList>
       </Container>
 
-      {/* CLICK OUTSIDE */}
-      {/* https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-with-react-hook-ba77c37c7e82 */}
       {/* Parece meio redundante e ineficiente */}
       {openModal && (
         <Modal open={openModal}>
