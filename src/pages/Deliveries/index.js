@@ -66,6 +66,7 @@ export default function Deliveries() {
     setModalDelivery(delivery);
     setOpenModal(true);
   }
+
   function handleEdit(deliveryId) {}
   function handleDelete(deliveryId) {}
 
@@ -148,35 +149,36 @@ export default function Deliveries() {
         </DeliveriesList>
       </Container>
 
+      {/* CLICK OUTSIDE */}
+      {/* https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-with-react-hook-ba77c37c7e82 */}
+      {/* Parece meio redundante e ineficiente */}
       {openModal && (
-        <Modal isOpen={openModal}>
-          <div id="modal-content">
-            <section>
-              <p>
-                <strong>Informações da encomenda</strong>
-              </p>
-              <p> {modalDelivery.recipient.city}</p>
-              <p> {modalDelivery.recipient.state} </p>
-              <p> {modalDelivery.recipient.cep} </p>
-            </section>
-            <section>
-              <p>
-                <strong>Datas</strong>
-              </p>
-              <p>
-                <span>Retirada: </span> {modalDelivery.formattedStartDate}
-              </p>
-              <p>
-                <span>Entrega: </span>
-                {modalDelivery.formattedEndDate}
-              </p>
-            </section>
-            <section>
-              <p>
-                <strong>Assinatura do destinatário</strong>
-              </p>
-            </section>
-          </div>
+        <Modal open={openModal}>
+          <section>
+            <p>
+              <strong>Informações da encomenda</strong>
+            </p>
+            <p> {modalDelivery.recipient.city} </p>
+            <p> {modalDelivery.recipient.state} </p>
+            <p> {modalDelivery.recipient.cep} </p>
+          </section>
+          <section>
+            <p>
+              <strong>Datas</strong>
+            </p>
+            <p>
+              <span>Retirada: </span> {modalDelivery.formattedStartDate}
+            </p>
+            <p>
+              <span>Entrega: </span>
+              {modalDelivery.formattedEndDate}
+            </p>
+          </section>
+          <section>
+            <p>
+              <strong>Assinatura do destinatário</strong>
+            </p>
+          </section>
         </Modal>
       )}
     </>

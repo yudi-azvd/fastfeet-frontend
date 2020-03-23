@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import searchSvg from '../../assets/search.svg';
 
+import BasicModal from '../../components/BasicModal';
+
 export const Container = styled.div`
   margin: 30px 10%;
 
@@ -123,56 +125,39 @@ export const DeliveryItem = memo(styled.li`
   }
 `);
 
-export const Modal = styled.div`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 5;
+export const Modal = styled(BasicModal)`
+  color: white;
+  padding: 40px;
+  background: red;
 
-  div#modal-content {
-    position: absolute;
-    /* top e bottom precisam estar deifinidos 
-    pra que uma altura esteja definida (?). 
-    left e right precisam estar definidos p que
-    ele tenha comprimento. */
-    top: 0px;
-    left: 40px;
-    right: 40px;
-    bottom: 10px;
-    box-shadow: 0px 0px 10px #00000033;
-    background: #fff;
-    overflow: auto;
-    border-radius: 4px;
-    margin: 238px auto;
-    width: 450px;
-    min-height: 253px;
-    padding: 25px;
+  div#modal-container {
+    color: purple;
+  }
 
-    section {
-      display: block;
+  div.modal-component-content {
+    background: purple;
+  }
 
-      & + section {
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
+  section {
+    display: block;
+
+    & + section {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 8px;
+
+      strong {
+        color: #444;
       }
 
-      p {
+      span {
+        font-weight: bold;
         color: #666;
-        margin-bottom: 8px;
-
-        strong {
-          color: #444;
-        }
-
-        span {
-          font-weight: bold;
-          color: #666;
-        }
       }
     }
   }
