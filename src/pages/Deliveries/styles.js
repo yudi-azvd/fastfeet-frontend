@@ -126,25 +126,13 @@ export const DeliveryItem = memo(styled.li`
 `);
 
 export const Modal = styled(BasicModal)`
-  color: white;
-  padding: 40px;
-  background: red;
-
-  div#modal-container {
-    color: purple;
-  }
-
-  div.modal-component-content {
-    background: purple;
-  }
-
   section {
     display: block;
 
     & + section {
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #ededed;
     }
 
     p {
