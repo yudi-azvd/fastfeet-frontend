@@ -151,7 +151,7 @@ export default function Deliveries() {
 
       {/* Parece meio redundante e ineficiente */}
       {openModal && (
-        <Modal open={openModal}>
+        <Modal open={openModal} close={() => setOpenModal(false)}>
           <section>
             <p>
               <strong>Informações da encomenda</strong>
