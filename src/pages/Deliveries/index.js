@@ -183,6 +183,17 @@ export default function Deliveries() {
           <section>
             <p>
               <strong>Assinatura do destinatário</strong>
+              {modalDelivery.signature ? (
+                <img
+                  src={modalDelivery.signature}
+                  alt="assinatura da entrega"
+                />
+              ) : (
+                <>
+                  <br />
+                  <span> Essa entrega ainda não possui assinatura </span>
+                </>
+              )}
             </p>
           </section>
         </Modal>
