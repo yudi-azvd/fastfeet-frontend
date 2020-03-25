@@ -76,7 +76,18 @@ export default function Deliveries() {
   }
 
   function handleEdit(deliveryId) {}
-  function handleDelete(deliveryId) {}
+
+  async function handleDelete(deliveryId) {
+    const yes = window.confirm(
+      `Tem certeza que deseja remover a encomenda #${deliveryId}?`
+    );
+
+    if (yes) {
+      api.delete(`/deliveries/${deliveryId}`);
+
+      setDeliveries(deliveries.filter(d => d.id !== deliveryId));
+    }
+  }
 
   return (
     <>
