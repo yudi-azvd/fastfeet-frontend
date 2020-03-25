@@ -21,7 +21,7 @@ const BasicModal = ({ open, children, className, close }) => {
     [close]
   );
 
-  const handleKeyDown = useCallback(
+  const handleKeyUp = useCallback(
     event => {
       if (event.key !== 'Escape') {
         return;
@@ -36,17 +36,17 @@ const BasicModal = ({ open, children, className, close }) => {
   useEffect(() => {
     if (open) {
       document.addEventListener('mousedown', handleClick);
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keyup', handleKeyUp);
     } else {
       document.removeEventListener('mousedown', handleClick);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [handleClick, handleKeyDown, open]);
+  }, [handleClick, handleKeyUp, open]);
 
   return (
     <Container
