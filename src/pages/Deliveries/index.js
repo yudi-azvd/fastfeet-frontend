@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState, useEffect } from 'react';
+import { format } from 'date-fns';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { IoMdEye } from 'react-icons/io';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
+
 import api from '../../services/api';
 
 import { Container, DeliveriesList, DeliveryItem, Modal } from './styles';
@@ -37,14 +39,20 @@ export default function Deliveries() {
         },
       });
 
-      setDeliveries(
-        response.data.map(delivery => ({
+      const data = response.data.map(delivery => {
+        const d = {
           ...delivery,
-          formattedStartDate: 'a',
-          formattedEndDate: 'b',
-          formattedCanceledAt: 'c',
-        }))
-      );
+          formattedStartDate: format(
+            new Date(delivery.startDate),
+            'dd/MM/yyyy'
+          ),
+          formattedEndDate: format(new Date(delivery.endDate), 'dd/MM/yyyy'),
+        };
+
+        return d;
+      });
+
+      setDeliveries(data);
     }
 
     loadDeliveries();
