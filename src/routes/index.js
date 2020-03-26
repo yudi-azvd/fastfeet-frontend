@@ -18,6 +18,8 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route exact path="/deliveries" component={Deliveries} isPrivate />
+      {/* Ideia pra não precisar usar dois componentes de rota pra mesma página */}
+      {/* https://stackoverflow.com/questions/40541994/multiple-path-names-for-a-same-component-in-react-router */}
       <Route path="/deliveries/:id/edit" component={DeliveryForm} isPrivate />
       {/* <Route path="/deliveries/new" component={DeliveryForm} isPrivate /> */}
 
