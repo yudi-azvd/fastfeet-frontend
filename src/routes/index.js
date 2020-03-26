@@ -17,13 +17,9 @@ export default function Routes() {
       <Route exact path="/" component={SignIn} />
       <Route path="/register" component={SignUp} />
 
-      <Route path="/deliveries" component={Deliveries} isPrivate />
-      <Route
-        path="/deliveries/(new|:id/edit)/"
-        component={DeliveryForm}
-        isPrivate
-      />
-      <Route path="/deliveries/new" component={Deliveries} isPrivate />
+      <Route exact path="/deliveries" component={Deliveries} isPrivate />
+      <Route path="/deliveries/:id/edit" component={DeliveryForm} isPrivate />
+      {/* <Route path="/deliveries/new" component={DeliveryForm} isPrivate /> */}
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} />
