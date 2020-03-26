@@ -7,6 +7,7 @@ import { IoMdEye } from 'react-icons/io';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import api from '../../services/api';
+import history from '../../services/history';
 
 import { Container, DeliveriesList, DeliveryItem, Modal } from './styles';
 
@@ -75,7 +76,11 @@ export default function Deliveries() {
     setOpenModal(true);
   }
 
-  function handleEdit(deliveryId) {}
+  function handleEdit(delivery) {
+    history.push(`/deliveries/${delivery.id}`, {
+      state: { delivery },
+    });
+  }
 
   async function handleDelete(deliveryId) {
     const yes = window.confirm(
@@ -152,7 +157,7 @@ export default function Deliveries() {
                         <IoMdEye size={15} color="#8E5BE8" />
                         <span>Visualizar</span>
                       </li>
-                      <li onClick={() => handleEdit(d.id)}>
+                      <li onClick={() => handleEdit(d)}>
                         <MdEdit size={16} color="#4D85EE" /> <span>Editar</span>
                       </li>
                       <li onClick={() => handleDelete(d.id)}>
