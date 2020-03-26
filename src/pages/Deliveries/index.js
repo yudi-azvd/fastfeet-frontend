@@ -77,9 +77,7 @@ export default function Deliveries() {
   }
 
   function handleEdit(delivery) {
-    history.push(`/deliveries/${delivery.id}`, {
-      state: { delivery },
-    });
+    history.push(`/deliveries/${delivery.id}/edit`, { delivery });
   }
 
   async function handleDelete(deliveryId) {
