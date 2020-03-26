@@ -7,6 +7,8 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 
 import Deliveries from '../pages/Deliveries';
+import DeliveryForm from '../pages/DeliveryForm';
+
 import NotFound from '../pages/NotFound';
 
 export default function Routes() {
@@ -16,6 +18,11 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/deliveries" component={Deliveries} isPrivate />
+      <Route
+        path="/deliveries/(new|:id/edit)/"
+        component={DeliveryForm}
+        isPrivate
+      />
       <Route path="/deliveries/new" component={Deliveries} isPrivate />
 
       {/* Essa rota é privada ou não? */}
