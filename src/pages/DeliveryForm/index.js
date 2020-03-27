@@ -73,8 +73,6 @@ export default function DeliveryForm() {
           <span>Produto</span>
           <Input id="product" name="product" type="text" />
         </label>
-
-        <button type="submit">enviar</button>
       </Form>
     </Container>
   );
