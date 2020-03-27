@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import history from '../../services/history';
 import api from '../../services/api';
 
 import { GoBack as GoBackButton } from '../../components/Buttons/GoBack';
+import { Save as SaveButton } from '../../components/Buttons/Save';
 import AsyncSelect from '../../components/AsyncSelect';
 import Input from '../../components/Form/Input';
 import { Container, Form } from './styles';
 
 export default function DeliveryForm() {
+  const formRef = useRef(null);
   const { delivery } = history.location.state;
 
   delivery.recipient_id = {
@@ -37,7 +39,13 @@ export default function DeliveryForm() {
     }, 1000);
   }
 
-  function handleSubmit(data) {}
+  function submitForm() {
+    formRef.current.submitForm();
+  }
+
+  function handleSubmit(data) {
+    console.log(data);
+  }
 
   return (
     <Container>
@@ -46,11 +54,15 @@ export default function DeliveryForm() {
 
         <div className="buttons">
           <GoBackButton to="/deliveries" />
-          <button type="button">salvar </button>
+          <SaveButton onClick={() => submitForm()} />
         </div>
       </header>
 
-      <Form initialData={delivery || null} onSubmit={handleSubmit}>
+      <Form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        initialData={delivery || null}
+      >
         <div className="input-group">
           <label htmlFor="recipient">
             <span>Destinatário</span>
