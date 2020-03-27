@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Select from 'react-select/async';
 import { useField } from '@unform/core';
 
+import { selectStyle } from './styles';
+
 export default function AsyncSelect({ name, ...rest }) {
   const selectRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
@@ -20,6 +22,7 @@ export default function AsyncSelect({ name, ...rest }) {
 
           return ref.select.state.value.map(option => option.value);
         }
+
         if (!ref.select.state.value) {
           return '';
         }
@@ -32,10 +35,11 @@ export default function AsyncSelect({ name, ...rest }) {
   return (
     <>
       <Select
-        cacheOptions
-        defaultInputValue={defaultValue}
         ref={selectRef}
+        defaultValue={defaultValue}
+        cacheOptions
         {...rest}
+        styles={selectStyle}
       />
       {error && <span className="error"> deu erro </span>}
     </>
