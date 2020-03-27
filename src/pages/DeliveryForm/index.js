@@ -36,10 +36,7 @@ export default function DeliveryForm() {
     }, 1000);
   }
 
-  console.log(delivery);
-  function handleSubmit(data) {
-    console.log(data);
-  }
+  function handleSubmit(data) {}
 
   return (
     <Container>
