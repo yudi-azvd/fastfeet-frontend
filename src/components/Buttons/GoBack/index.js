@@ -7,7 +7,7 @@ import { A } from './styles';
 export function GoBack({ to }) {
   return (
     <A className="go-back" to={to}>
-      <MdKeyboardArrowLeft size="24px" color="#fff" /> voltar
+      <MdKeyboardArrowLeft size={24} color="#fff" /> voltar
     </A>
   );
 }

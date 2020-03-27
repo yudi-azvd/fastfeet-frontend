@@ -8,8 +8,11 @@ export const A = styled(Link)`
   font-size: 14px;
   height: 36px;
   border-radius: 4px;
-  padding: 12px;
   text-decoration: none;
+  /* Não fica exatamente com 112px porque o svg tem size 24px */
+  /* max-width: 112px; */
+  padding-left: 22px;
+  padding-right: 24px;
 
   text-transform: uppercase;
 
@@ -17,6 +20,6 @@ export const A = styled(Link)`
   align-items: center;
 
   svg {
-    margin-right: 7.59px;
+    /* margin-right: 7.59px; */
   }
 `;
