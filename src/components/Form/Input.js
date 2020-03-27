@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
-
-// import { Container } from './styles';
 
 export default function Input({ name, ...rest }) {
   const inputRef = useRef(null);
@@ -17,7 +16,12 @@ export default function Input({ name, ...rest }) {
 
   return (
     <>
-      <input ref={inputRef} type="text" {...rest} />
+      <input ref={inputRef} type="text" defaultValue={defaultValue} {...rest} />
+      {error && <span className="error"> deu erro </span>}
     </>
   );
 }
+
+Input.propTypes = {
+  name: PropTypes.string.isRequired,
+};
