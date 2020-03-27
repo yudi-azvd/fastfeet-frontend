@@ -18,6 +18,10 @@ export const Container = styled.div`
     div.buttons {
       display: flex;
       align-items: center;
+
+      .go-back {
+        margin-right: 16px;
+      }
     }
   }
 `;

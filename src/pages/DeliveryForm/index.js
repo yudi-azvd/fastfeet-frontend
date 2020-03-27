@@ -3,6 +3,7 @@ import React from 'react';
 import history from '../../services/history';
 import api from '../../services/api';
 
+import { GoBack as GoBackButton } from '../../components/Buttons/GoBack';
 import AsyncSelect from '../../components/AsyncSelect';
 import Input from '../../components/Form/Input';
 import { Container, Form } from './styles';
@@ -44,8 +45,8 @@ export default function DeliveryForm() {
         <h1>Edição de encomenda</h1>
 
         <div className="buttons">
-          <button type="button">voltar</button>
-          <button type="button">salvar</button>
+          <GoBackButton to="/deliveries" />
+          <button type="button">salvar </button>
         </div>
       </header>
 
