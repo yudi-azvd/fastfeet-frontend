@@ -54,6 +54,19 @@ module.exports = {
       "required": {
           "every": [ "id" ]
       }
-  }]
+    }],
+
+    "jsx-a11y/label-has-associated-control": [ 2, {
+      "labelComponents": ["CustomInputLabel"],
+      "labelAttributes": ["label"],
+      "controlComponents": ["CustomInput"],
+      "depth": 3,
+    }],
+
+    "react/jsx-props-no-spreading": ["error", {
+      "html": "ignore",
+      "custom": "ignore",
+      "exceptions": [""]
+    }]
   },
 };
