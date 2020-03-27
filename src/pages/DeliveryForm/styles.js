@@ -52,7 +52,7 @@ export const Form = styled(Unform)`
     height: 45px;
     padding: 15px;
     border-radius: 4px;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     color: #444;
   }
 
