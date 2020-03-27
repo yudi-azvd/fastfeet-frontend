@@ -49,7 +49,7 @@ export default function DeliveryForm() {
         </div>
       </header>
 
-      <Form initialData={delivery} onSubmit={handleSubmit}>
+      <Form initialData={delivery || null} onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="recipient">
             <span>Destinatário</span>
