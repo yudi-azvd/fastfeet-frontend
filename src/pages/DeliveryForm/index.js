@@ -1,13 +1,45 @@
 import React from 'react';
 
 import history from '../../services/history';
+import api from '../../services/api';
 
+import AsyncSelect from '../../components/AsyncSelect';
 import Input from '../../components/Form/Input';
 import { Container, Form } from './styles';
 
 export default function DeliveryForm() {
   const { delivery } = history.location.state;
-  console.log(delivery.product);
+
+  delivery.recipient_id = {
+    value: delivery.recipient.id,
+    label: delivery.recipient.name,
+  };
+
+  delivery.deliveryman_id = {
+    value: delivery.deliveryman.id,
+    label: delivery.deliveryman.name,
+  };
+
+  function loadDeliverymenOptions(inputValue, callback) {
+    setTimeout(() => {
+      api
+        .get(`/deliverymen?q=${inputValue}`)
+        .then(response =>
+          response.data.map(deliveryman => ({
+            value: deliveryman.id,
+            label: deliveryman.name,
+          }))
+        )
+        .then(options => {
+          callback(options);
+        });
+    }, 1000);
+  }
+
+  console.log(delivery);
+  function handleSubmit(data) {
+    console.log(data);
+  }
 
   return (
     <Container>
@@ -20,16 +52,20 @@ export default function DeliveryForm() {
         </div>
       </header>
 
-      <Form initialData={delivery}>
+      <Form initialData={delivery} onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="recipient">
             <span>Destinatário</span>
-            <Input id="recipient" name="recipient" type="text" />
+            <AsyncSelect
+              id="recipient"
+              loadOptions={loadDeliverymenOptions}
+              name="recipient_id"
+            />
           </label>
 
           <label htmlFor="deliveryman">
             <span>Entregador</span>
-            <Input name="deliveryman" type="text" />
+            <AsyncSelect id="deliveryman" name="deliveryman_id" />
           </label>
         </div>
 
@@ -37,6 +73,8 @@ export default function DeliveryForm() {
           <span>Produto</span>
           <Input id="product" name="product" type="text" />
         </label>
+
+        <button type="submit">enviar</button>
       </Form>
     </Container>
   );

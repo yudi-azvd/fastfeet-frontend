@@ -49,6 +49,7 @@ export const Form = styled(Unform)`
     padding: 15px;
     border-radius: 4px;
     border: 1px solid #eee;
+    color: #444;
   }
 
   div.input-group {
