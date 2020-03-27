@@ -5,7 +5,7 @@ import { Form } from '@unform/web';
 
 import logo from '../../assets/fastfeet-logo.png';
 
-import Input from '../../components/Input';
+import Input from '../../components/Form/Input';
 import SubmitButton from '../../components/SubmitButton';
 
 import { signUpRequest } from '../../store/modules/auth/actions';
