@@ -24,12 +24,6 @@ export const Container = styled.div`
       color: #ddd;
       border-radius: 4px;
     }
-
-    button {
-      /* TEMPORÁRIO ENQT NÃO HÁ COPNNT */
-      background: purple;
-      color: white;
-    }
   }
 `;
 
