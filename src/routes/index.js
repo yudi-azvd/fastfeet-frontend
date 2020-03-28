@@ -21,7 +21,7 @@ export default function Routes() {
       {/* Ideia pra não precisar usar dois componentes de rota pra mesma página */}
       {/* https://stackoverflow.com/questions/40541994/multiple-path-names-for-a-same-component-in-react-router */}
       <Route path="/deliveries/:id/edit" component={DeliveryForm} isPrivate />
-      {/* <Route path="/deliveries/new" component={DeliveryForm} isPrivate /> */}
+      <Route path="/deliveries/new" component={DeliveryForm} isPrivate />
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} />
