@@ -11,9 +11,9 @@ import Input from '../../components/Form/Input';
 import { Container, Form } from './styles';
 
 export default function DeliveryForm({ match }) {
-  const editMode = String(match.path).endsWith('/edit');
   const formRef = useRef(null);
   const [delivery, setDelivery] = useState(null);
+  const editMode = String(match.path).endsWith('/edit');
 
   useEffect(() => {
     async function loadDelivery() {
@@ -84,7 +84,7 @@ export default function DeliveryForm({ match }) {
     formRef.current.submitForm();
   }
 
-  async function handleSubmit(data) {
+  async function handleEditSubmit(data) {
     try {
       await api.put(`/deliveries/${delivery.id}`, data);
       toast.success('Encomenda atualizada com sucesso!');
@@ -93,10 +93,19 @@ export default function DeliveryForm({ match }) {
     }
   }
 
+  async function handleCreateSubmit(data) {
+    try {
+      await api.post(`/deliveries`, data);
+      toast.success('Encomenda criada com sucesso!');
+    } catch (error) {
+      toast.error(String(error));
+    }
+  }
+
   return (
     <Container>
       <header>
-        <h1>Edição de encomenda</h1>
+        <h1>{editMode ? 'Edição de encomenda' : 'Cadastrar encomenda'}</h1>
 
         <div className="buttons">
           <GoBackButton to="/deliveries" />
@@ -106,14 +115,15 @@ export default function DeliveryForm({ match }) {
 
       <Form
         ref={formRef}
-        onSubmit={handleSubmit}
+        // seria melhor que não houvesse tantas decisões na renderização
+        onSubmit={editMode ? handleEditSubmit : handleCreateSubmit}
         initialData={delivery || null}
       >
         <div className="input-group">
           <label htmlFor="recipient">
             <span>Destinatário</span>
             <AsyncSelect
-              placeholder="Carregando..."
+              placeholder={editMode ? 'Carregando...' : 'Nome do destinatário'}
               id="recipient"
               loadOptions={loadRecipientsOptions}
               name="recipient_id"
@@ -123,7 +133,7 @@ export default function DeliveryForm({ match }) {
           <label htmlFor="deliveryman">
             <span>Entregador</span>
             <AsyncSelect
-              placeholder="Carregando..."
+              placeholder={editMode ? 'Carregando...' : 'Nome do entregador'}
               id="deliveryman"
               loadOptions={loadDeliverymenOptions}
               name="deliveryman_id"
@@ -137,7 +147,7 @@ export default function DeliveryForm({ match }) {
             id="product"
             name="product"
             type="text"
-            placeholder="Carregando..."
+            placeholder={editMode ? 'Carregando...' : 'Nome do produto'}
           />
         </label>
       </Form>
@@ -148,7 +158,8 @@ export default function DeliveryForm({ match }) {
 DeliveryForm.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
+      id: PropTypes.string,
+    }),
+    path: PropTypes.string,
   }).isRequired,
 };
