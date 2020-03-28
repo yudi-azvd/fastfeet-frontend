@@ -136,7 +136,11 @@ export default function Deliveries() {
                       color={colors[index % colors.length]}
                     />
                   )}
-                  <span>{d.deliveryman.name}</span>
+                  <span>
+                    {d.deliveryman.name.length > 15
+                      ? `${d.deliveryman.name.slice(0, 8)}...`
+                      : d.deliveryman.name}
+                  </span>
                 </div>
                 <div> {d.recipient.city} </div>
                 <div> {d.recipient.state} </div>
