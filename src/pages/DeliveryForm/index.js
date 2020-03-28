@@ -11,6 +11,7 @@ import Input from '../../components/Form/Input';
 import { Container, Form } from './styles';
 
 export default function DeliveryForm({ match }) {
+  const editMode = String(match.path).endsWith('/edit');
   const formRef = useRef(null);
   const [delivery, setDelivery] = useState(null);
 
@@ -44,8 +45,8 @@ export default function DeliveryForm({ match }) {
       });
     }
 
-    loadDelivery();
-  }, [match.params.id]);
+    if (editMode) loadDelivery();
+  }, [editMode, match, match.params.id]);
 
   function loadRecipientsOptions(inputValue, callback) {
     setTimeout(() => {
