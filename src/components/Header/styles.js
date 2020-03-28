@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -47,8 +48,7 @@ export const Container = styled.div`
             transition: opacity 0.2s;
 
             &:not(.selected):hover {
-              /* Melhor seria se fosse um darken */
-              opacity: 0.8;
+              color: ${darken(0.08, '#999')};
             }
 
             &.selected {
