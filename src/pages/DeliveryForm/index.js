@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
-import history from '../../services/history';
 import api from '../../services/api';
 
 import { GoBack as GoBackButton } from '../../components/Buttons/GoBack';
@@ -9,19 +10,58 @@ import AsyncSelect from '../../components/AsyncSelect';
 import Input from '../../components/Form/Input';
 import { Container, Form } from './styles';
 
-export default function DeliveryForm() {
+export default function DeliveryForm({ match }) {
   const formRef = useRef(null);
-  const { delivery } = history.location.state;
+  const [delivery, setDelivery] = useState(null);
 
-  delivery.recipient_id = {
-    value: delivery.recipient.id,
-    label: delivery.recipient.name,
-  };
+  useEffect(() => {
+    async function loadDelivery() {
+      const response = await api.get(`/deliveries?id=${match.params.id}`);
+      const d = response.data;
 
-  delivery.deliveryman_id = {
-    value: delivery.deliveryman.id,
-    label: delivery.deliveryman.name,
-  };
+      // Isso é pro defaultValue dos AsyncSelect funcionarem.
+      // Sim, me cheira a gambiarra.
+      formRef.current.setFieldValue('deliveryman_id', {
+        label: d.deliveryman.name,
+        value: d.deliveryman.id,
+      });
+
+      formRef.current.setFieldValue('recipient_id', {
+        label: d.recipient.name,
+        value: d.recipient.id,
+      });
+
+      setDelivery({
+        ...d,
+        deliveryman_id: {
+          value: d.deliveryman.id,
+          label: d.deliveryman.name,
+        },
+        recipient_id: {
+          value: d.recipient.id,
+          label: d.recipient.name,
+        },
+      });
+    }
+
+    loadDelivery();
+  }, [match.params.id]);
+
+  function loadRecipientsOptions(inputValue, callback) {
+    setTimeout(() => {
+      api
+        .get(`/recipients?q=${inputValue}`)
+        .then(response =>
+          response.data.map(deliveryman => ({
+            value: deliveryman.id,
+            label: deliveryman.name,
+          }))
+        )
+        .then(options => {
+          callback(options);
+        });
+    }, 1000);
+  }
 
   function loadDeliverymenOptions(inputValue, callback) {
     setTimeout(() => {
@@ -43,8 +83,13 @@ export default function DeliveryForm() {
     formRef.current.submitForm();
   }
 
-  function handleSubmit(data) {
-    console.log(data);
+  async function handleSubmit(data) {
+    try {
+      await api.put(`/deliveries/${delivery.id}`, data);
+      toast.success('Encomenda atualizada com sucesso!');
+    } catch (error) {
+      toast.error(String(error));
+    }
   }
 
   return (
@@ -67,23 +112,42 @@ export default function DeliveryForm() {
           <label htmlFor="recipient">
             <span>Destinatário</span>
             <AsyncSelect
+              placeholder="Carregando..."
               id="recipient"
-              loadOptions={loadDeliverymenOptions}
+              loadOptions={loadRecipientsOptions}
               name="recipient_id"
             />
           </label>
 
           <label htmlFor="deliveryman">
             <span>Entregador</span>
-            <AsyncSelect id="deliveryman" name="deliveryman_id" />
+            <AsyncSelect
+              placeholder="Carregando..."
+              id="deliveryman"
+              loadOptions={loadDeliverymenOptions}
+              name="deliveryman_id"
+            />
           </label>
         </div>
 
         <label htmlFor="product">
           <span>Produto</span>
-          <Input id="product" name="product" type="text" />
+          <Input
+            id="product"
+            name="product"
+            type="text"
+            placeholder="Carregando..."
+          />
         </label>
       </Form>
     </Container>
   );
 }
+
+DeliveryForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
