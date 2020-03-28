@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Button = styled.button`
   border: none;
@@ -16,6 +17,12 @@ export const Button = styled.button`
 
   display: inline-flex;
   align-items: center;
+
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${darken(0.05, '#7d40e7')};
+  }
 
   svg {
     margin-right: 7.59px;
