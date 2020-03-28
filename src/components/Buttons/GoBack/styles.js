@@ -18,8 +18,4 @@ export const A = styled(Link)`
 
   display: flex;
   align-items: center;
-
-  svg {
-    /* margin-right: 7.59px; */
-  }
 `;
