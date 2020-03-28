@@ -28,10 +28,6 @@ export const Container = styled.div`
       border: 1px solid #ddd;
       color: #999;
       border-radius: 4px;
-
-      &::placeholder {
-        color: #999;
-      }
     }
   }
 `;
