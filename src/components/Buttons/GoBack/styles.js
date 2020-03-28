@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { darken } from 'polished';
 
 export const A = styled(Link)`
   background: #ccc;
@@ -18,4 +19,10 @@ export const A = styled(Link)`
 
   display: flex;
   align-items: center;
+
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${darken(0.05, '#ccc')};
+  }
 `;
