@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { IoMdEye } from 'react-icons/io';
-import { MdEdit, MdDeleteForever } from 'react-icons/md';
+import { MdEdit, MdDeleteForever, MdVisibility } from 'react-icons/md';
 
 import api from '../../services/api';
 import history from '../../services/history';
@@ -156,7 +155,7 @@ export default function Deliveries() {
                     />
                     <ActionsDropdown open={d.id === openDeliveryActionsId}>
                       <li onClick={() => handleView(d)}>
-                        <IoMdEye size={15} color="#8E5BE8" />
+                        <MdVisibility size={15} color="#8E5BE8" />
                         <span>Visualizar</span>
                       </li>
                       <li onClick={() => handleEdit(d)}>
