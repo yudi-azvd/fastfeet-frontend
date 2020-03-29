@@ -9,6 +9,8 @@ import SignUp from '../pages/SignUp';
 import Deliveries from '../pages/Deliveries';
 import DeliveryForm from '../pages/DeliveryForm';
 
+import Deliverymen from '../pages/Deliverymen';
+
 import NotFound from '../pages/NotFound';
 
 export default function Routes() {
@@ -22,6 +24,7 @@ export default function Routes() {
       {/* https://stackoverflow.com/questions/40541994/multiple-path-names-for-a-same-component-in-react-router */}
       <Route path="/deliveries/:id/edit" component={DeliveryForm} isPrivate />
       <Route path="/deliveries/new" component={DeliveryForm} isPrivate />
+      <Route exact path="/deliverymen" component={Deliverymen} isPrivate />
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} />
