@@ -27,7 +27,7 @@ export default function Routes() {
       <Route exact path="/deliverymen" component={Deliverymen} isPrivate />
 
       {/* Essa rota é privada ou não? */}
-      <Route path="*" component={NotFound} />
+      <Route path="*" component={NotFound} isPrivate />
     </Switch>
   );
 }

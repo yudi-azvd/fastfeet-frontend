@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import api from '../../services/api';
+import history from '../../services/history';
 
 import { Container, DeliverymenList, DeliverymanItem } from './styles';
 
@@ -45,9 +48,20 @@ export default function Deliverymen() {
     }
   }
 
-  function handleView(deliveryman) {
-    // setModalDelivery(delivery);
-    // setOpenModal(true);
+  function handleEdit(deliverymanId) {
+    history.push(`/deliverymen/${deliverymanId}/edit`);
+  }
+
+  async function handleDelete(deliveryman) {
+    const yes = window.confirm(
+      `Tem certeza que deseja remover ${deliveryman.name}?`
+    );
+
+    if (yes) {
+      api.delete(`/deliverymen/${deliveryman.id}`);
+
+      setDeliverymen(deliverymen.filter(d => d.id !== deliveryman.id));
+    }
   }
 
   return (
@@ -90,7 +104,9 @@ export default function Deliverymen() {
                   />
                 )}
               </div>
-              <div> {d.name} </div>
+              <div>
+                <span>{d.name} </span>
+              </div>
               <div> {d.email} </div>
               <div className="actions">
                 <div className="dropdown">
@@ -100,11 +116,11 @@ export default function Deliverymen() {
                     onClick={() => toggleActionsModalVisibility(d)}
                   />
                   <ActionsDropdown open={d.id === openDeliverymanActionsId}>
-                    <li onClick={() => handleView(d)}>
+                    <li onClick={() => handleEdit(d.id)}>
                       <MdEdit size={15} color="#8E5BE8" />
                       <span>Editar</span>
                     </li>
-                    <li>
+                    <li onClick={() => handleDelete(d)}>
                       <MdDeleteForever size={15} color="#DE3B3B" />
                       <span>Exlcuir</span>
                     </li>
