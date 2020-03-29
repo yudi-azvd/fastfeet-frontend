@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { IoMdEye } from 'react-icons/io';
 import { MdEdit, MdDeleteForever, MdVisibility } from 'react-icons/md';
 
 import api from '../../services/api';
