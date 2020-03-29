@@ -34,16 +34,18 @@ export const Form = styled(Unform)`
 
   div.avatar-input {
     margin: 0 auto;
+    margin-bottom: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px dashed purple;
-    background: pink;
+    border: 2px dashed #ccc;
+    background: #eee;
+    color: #ccc;
+    font-size: 66px;
     width: 148px;
     height: 148px;
     border-radius: 50%;
-    font-size: 66px;
-    color: purple;
+    cursor: pointer;
   }
 
   label {

@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import { Container, Form } from './styles';
 
-import Input from '../../components/Form/Input';
+import api from '../../services/api';
+
 import { GoBack as GoBackButton } from '../../components/Buttons/GoBack';
 import { Save as SaveButton } from '../../components/Buttons/Save';
+import Input from '../../components/Form/Input';
 
-export default function DeliverymanForm() {
+export default function DeliverymanForm({ match }) {
+  const formRef = useRef(null);
+  const { id: deliverymanId } = match.params;
   const editMode = true;
+
+  useEffect(() => {
+    async function loadDeliveryman() {
+      const response = await api.get(`/deliverymen?id=${deliverymanId}`);
+      formRef.current.setData(response.data);
+    }
+
+    loadDeliveryman();
+  }, [deliverymanId]);
+
+  function submitForm() {
+    formRef.current.submitForm();
+  }
+
+  async function handleEditSubmit(data) {
+    try {
+      await api.put(`/deliverymen/${deliverymanId}`, data);
+      toast.success('Entregador atualizado com sucesso!');
+    } catch (error) {
+      toast.error(String(error));
+    }
+  }
 
   return (
     <Container>
@@ -16,23 +44,38 @@ export default function DeliverymanForm() {
 
         <div className="buttons">
           <GoBackButton to="/deliveries" />
-          {/* <SaveButton onClick={() => submitForm()} /> */}
-          <SaveButton />
+          <SaveButton onClick={() => submitForm()} />
         </div>
       </header>
 
-      <Form>
+      <Form ref={formRef} onSubmit={handleEditSubmit}>
         <div className="avatar-input">JD</div>
 
         <label htmlFor="name">
           <span>Nome</span>
-          <Input id="name" name="name" />
+          <Input
+            id="name"
+            name="name"
+            placeholder={editMode ? '' : 'Fulano da Silva'}
+          />
         </label>
         <label htmlFor="email">
           <span>Email</span>
-          <Input id="email" name="email" />
+          <Input
+            id="email"
+            placeholder={editMode ? '' : 'fulano@email.com'}
+            name="email"
+          />
         </label>
       </Form>
     </Container>
   );
 }
+
+DeliverymanForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
