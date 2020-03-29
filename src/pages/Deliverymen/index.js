@@ -1,24 +1,54 @@
 import React, { useState, useEffect } from 'react';
+import { FiMoreHorizontal } from 'react-icons/fi';
+import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import api from '../../services/api';
 
-import { Container, DeliverymenList } from './styles';
+import { Container, DeliverymenList, DeliverymanItem } from './styles';
 
 import CreateButton from '../../components/CreateButton';
 import DefaultAvatar from '../../components/DefaultAvatar';
 import ActionsDropdown from '../../components/ActionsDropdown';
 
+const colors = [
+  '#A28FD0',
+  '#CB946C',
+  '#83CEC9',
+  '#CC7584',
+  '#A8D080',
+  '#CCCC8B',
+];
+
 export default function Deliverymen() {
   const [deliverymen, setDeliverymen] = useState([]);
+  const [deliverymanQuery, setDeliverymanQuery] = useState('');
+  const [openDeliverymanActionsId, setOpenDeliverymanActionsId] = useState(0);
 
   useEffect(() => {
     async function loadDeliverymen() {
-      const response = await api.get('/deliverymen');
+      const response = await api.get(`/deliverymen?q=${deliverymanQuery}`);
       setDeliverymen(response.data);
     }
 
     loadDeliverymen();
-  });
+  }, [deliverymanQuery]);
+
+  function handleDeliverymanQueryChange(event) {
+    setDeliverymanQuery(event.target.value);
+  }
+
+  function toggleActionsModalVisibility(deliveryman) {
+    if (deliveryman.id === openDeliverymanActionsId) {
+      setOpenDeliverymanActionsId(0);
+    } else {
+      setOpenDeliverymanActionsId(deliveryman.id);
+    }
+  }
+
+  function handleView(deliveryman) {
+    // setModalDelivery(delivery);
+    // setOpenModal(true);
+  }
 
   return (
     <Container>
@@ -28,8 +58,8 @@ export default function Deliverymen() {
         <input
           type="text"
           placeholder="Buscar por entregadores"
-          // value={productQuery}
-          // onChange={handleProductQueryChange}
+          value={deliverymanQuery}
+          onChange={handleDeliverymanQueryChange}
         />
         <CreateButton link="/deliverymen/new" />
       </div>
@@ -45,12 +75,43 @@ export default function Deliverymen() {
 
         <ul>
           {deliverymen.map((d, index) => (
-            <li key={`deliverymen-${d.id}`}>
+            <DeliverymanItem key={`deliveryman-${d.id}`}>
               <div> #{d.id} </div>
-              <div> {d.avatar} </div>
+              <div className="avatar">
+                {d.avatar ? (
+                  <img // aí vem a URL do avatar
+                    src="https://api.adorable.io/avatars/40/abott@adorable.png"
+                    alt="imagem de perfil"
+                  />
+                ) : (
+                  <DefaultAvatar
+                    initials={d.name[0]}
+                    color={colors[index % colors.length]}
+                  />
+                )}
+              </div>
               <div> {d.name} </div>
               <div> {d.email} </div>
-            </li>
+              <div className="actions">
+                <div className="dropdown">
+                  <FiMoreHorizontal
+                    size={16}
+                    color="#666"
+                    onClick={() => toggleActionsModalVisibility(d)}
+                  />
+                  <ActionsDropdown open={d.id === openDeliverymanActionsId}>
+                    <li onClick={() => handleView(d)}>
+                      <MdEdit size={15} color="#8E5BE8" />
+                      <span>Editar</span>
+                    </li>
+                    <li>
+                      <MdDeleteForever size={15} color="#DE3B3B" />
+                      <span>Exlcuir</span>
+                    </li>
+                  </ActionsDropdown>
+                </div>
+              </div>
+            </DeliverymanItem>
           ))}
         </ul>
       </DeliverymenList>

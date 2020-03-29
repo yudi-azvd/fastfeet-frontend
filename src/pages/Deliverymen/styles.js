@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 import searchSvg from '../../assets/search.svg';
 
-import BasicModal from '../../components/BasicModal';
+// import BasicModal from '../../components/BasicModal';
 
 export const Container = styled.div`
   margin: 30px 10%;
@@ -44,7 +45,7 @@ export const DeliverymenList = styled.div`
     color: #444;
 
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
     padding-left: 25px;
 
     div.actions {
@@ -55,3 +56,66 @@ export const DeliverymenList = styled.div`
     }
   }
 `;
+
+export const DeliverymanItem = memo(styled.li`
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  padding: 0 28px;
+
+  /* aí quebra */
+  line-height: 57px;
+
+  color: #666;
+  background: #fff;
+  border-radius: 4px;
+  height: 57px;
+  margin-bottom: 21px;
+  overflow-wrap: normal;
+
+  div.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    span.default-avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+  }
+
+  div.status {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  div.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    div.dropdown {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+`);
