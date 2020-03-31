@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
 
-import { StyledInput } from './styles';
+import { Container } from './styles';
 
 export default function Input({ name, ...rest }) {
   const inputRef = useRef(null);
@@ -17,15 +17,10 @@ export default function Input({ name, ...rest }) {
   }, [fieldName, registerField]);
 
   return (
-    <>
-      <StyledInput
-        ref={inputRef}
-        type="text"
-        defaultValue={defaultValue}
-        {...rest}
-      />
-      {error && <span className="error"> deu erro </span>}
-    </>
+    <Container>
+      <input ref={inputRef} type="text" defaultValue={defaultValue} {...rest} />
+      {error && <span className="error"> {error} </span>}
+    </Container>
   );
 }
 
