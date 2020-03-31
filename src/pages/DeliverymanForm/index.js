@@ -46,7 +46,7 @@ export default function DeliverymanForm({ match }) {
       if (error instanceof Yup.ValidationError) {
         const validationErrors = {};
         error.inner.forEach(err => {
-          validationErrors[err] = err.message;
+          validationErrors[err.path] = err.message;
         });
         toast.error('Verifique os seus dados.');
         formRef.current.setErrors(validationErrors);
