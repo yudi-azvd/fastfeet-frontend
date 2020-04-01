@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
 import api from '../../services/api';
 
@@ -14,6 +15,11 @@ export default function DeliveryForm({ match }) {
   const formRef = useRef(null);
   const [delivery, setDelivery] = useState(null);
   const editMode = String(match.path).endsWith('/edit');
+  const schema = Yup.object().shape({
+    recipient_id: Yup.number(),
+    deliveryman_id: Yup.number(),
+    product: Yup.string().min(1, 'Não deixe o nome do produto vazio'),
+  });
 
   useEffect(() => {
     async function loadDelivery() {
@@ -86,19 +92,41 @@ export default function DeliveryForm({ match }) {
 
   async function handleEditSubmit(data) {
     try {
+      await schema.validate(data, { abortEarly: false });
       await api.put(`/deliveries/${delivery.id}`, data);
       toast.success('Encomenda atualizada com sucesso!');
     } catch (error) {
-      toast.error(String(error));
+      if (error instanceof Yup.ValidationError) {
+        const validationErrors = {};
+        error.inner.forEach(err => {
+          validationErrors[err.path] = err.message;
+        });
+        formRef.current.setErrors(validationErrors);
+        // como tratar erros dos campos recipient_id e deliveryman_id???
+        toast.error('Erro de validação. Verifique seus dados!');
+      } else {
+        toast.error(String(error));
+      }
     }
   }
 
   async function handleCreateSubmit(data) {
     try {
+      await schema.validate(data, { abortEarly: false });
       await api.post(`/deliveries`, data);
       toast.success('Encomenda criada com sucesso!');
     } catch (error) {
-      toast.error(String(error));
+      if (error instanceof Yup.ValidationError) {
+        const validationErrors = {};
+        // como tratar erros dos campos recipient_id e deliveryman_id???
+        error.inner.forEach(err => {
+          validationErrors[err.path] = err.message;
+        });
+        formRef.current.setErrors(validationErrors);
+        toast.error('Erro de validação. Verifique seus dados!');
+      } else {
+        toast.error(String(error));
+      }
     }
   }
 
