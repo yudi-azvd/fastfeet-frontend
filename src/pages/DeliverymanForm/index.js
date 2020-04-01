@@ -14,8 +14,8 @@ import Input from '../../components/Form/Input';
 export default function DeliverymanForm({ match }) {
   const formRef = useRef(null);
   const { id: deliverymanId } = match.params;
-  const editMode = true;
-  const schemaValidation = Yup.object().shape({
+  const editMode = match.path.endsWith('/edit');
+  const schema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Nome com 3 letras no mínimo.')
       .required(),
@@ -56,6 +56,25 @@ export default function DeliverymanForm({ match }) {
     }
   }
 
+  async function handleCreateSubmit(data) {
+    try {
+      await schema.validate(data, { abortEarly: false });
+      await api.post(`/deliverymen`, data);
+      toast.success('Entregador atualizado com sucesso!');
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const validationErrors = {};
+        error.inner.forEach(err => {
+          validationErrors[err.path] = err.message;
+        });
+        toast.error('Verifique os seus dados.');
+        formRef.current.setErrors(validationErrors);
+      } else {
+        toast.error(String(error));
+      }
+    }
+  }
+
   return (
     <Container>
       <header>
@@ -67,7 +86,10 @@ export default function DeliverymanForm({ match }) {
         </div>
       </header>
 
-      <Form ref={formRef} onSubmit={handleEditSubmit}>
+      <Form
+        ref={formRef}
+        onSubmit={editMode ? handleEditSubmit : handleCreateSubmit}
+      >
         <div className="avatar-input">JD</div>
 
         <label htmlFor="name">
