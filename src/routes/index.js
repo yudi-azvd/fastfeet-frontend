@@ -32,6 +32,7 @@ export default function Routes() {
         component={DeliverymanForm}
         isPrivate
       />
+      <Route path="/deliverymen/new" component={DeliverymanForm} isPrivate />
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} isPrivate />
