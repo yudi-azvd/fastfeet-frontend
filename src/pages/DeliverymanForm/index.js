@@ -39,7 +39,7 @@ export default function DeliverymanForm({ match }) {
 
   async function handleEditSubmit(data) {
     try {
-      await schemaValidation.validate(data, { abortEarly: false });
+      await schema.validate(data, { abortEarly: false });
       await api.put(`/deliverymen/${deliverymanId}`, data);
       toast.success('Entregador atualizado com sucesso!');
     } catch (error) {
@@ -115,8 +115,9 @@ export default function DeliverymanForm({ match }) {
 
 DeliverymanForm.propTypes = {
   match: PropTypes.shape({
+    path: PropTypes.string,
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
     }),
   }).isRequired,
 };
