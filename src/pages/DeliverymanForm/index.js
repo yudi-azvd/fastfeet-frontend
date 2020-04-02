@@ -29,8 +29,9 @@ export default function DeliverymanForm({ match }) {
   useEffect(() => {
     async function loadDeliveryman() {
       const response = await api.get(`/deliverymen?id=${deliverymanId}`);
-      formRef.current.setData(response.data);
-      console.log(response.data.avatar);
+      // formRef.current.setData(response.data);
+      setDeliveryman(response.data);
+      console.log(response.data);
       console.log(formRef.current.getData());
     }
 

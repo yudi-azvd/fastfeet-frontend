@@ -8,9 +8,12 @@ import { Container, ImageCrop, DefaultAvatarPreview } from './styles';
 
 export default function AvatarInput({ ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, registerField, defaultValue } = useField('avatar');
-  console.log('DEFAULT', defaultValue);
+  const { registerField, defaultValue } = useField('avatar');
+  console.log('DEFAULT 1', defaultValue);
+  console.log('DEFAULT 2', defaultValue && defaultValue.url);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
+  // const [preview, setPreview] = useState('string');
+  console.log('PREVIEW USESTATE', preview);
   const [fileId, setFileId] = useState(null);
 
   // const handlePreview = useCallback(event => {
@@ -43,6 +46,7 @@ export default function AvatarInput({ ...rest }) {
     if (!file) {
       setPreview(null);
     } else {
+      console.log('else set preview', previewURL);
       setPreview(previewURL);
     }
   }
@@ -58,15 +62,16 @@ export default function AvatarInput({ ...rest }) {
         setPreview(null);
       },
       setValue(_, value) {
-        console.log(_, value);
+        console.log('setValue', _, value);
         setPreview(value);
       },
     });
-  }, [fieldName, registerField]);
+  }, [registerField]);
 
   return (
     <Container>
       <label className="avatar" htmlFor="avatar">
+        {console.log('PREVIEW:', preview)}
         {preview ? (
           <ImageCrop>
             <img src={preview} alt="Preview" width="200" />
