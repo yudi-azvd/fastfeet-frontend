@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
@@ -10,9 +10,11 @@ import api from '../../services/api';
 import { GoBack as GoBackButton } from '../../components/Buttons/GoBack';
 import { Save as SaveButton } from '../../components/Buttons/Save';
 import Input from '../../components/Form/Input';
+import AvatarInput from './AvatarInput';
 
 export default function DeliverymanForm({ match }) {
   const formRef = useRef(null);
+  const [deliveryman, setDeliveryman] = useState(null);
   const { id: deliverymanId } = match.params;
   const editMode = match.path.endsWith('/edit');
   const schema = Yup.object().shape({
@@ -28,6 +30,8 @@ export default function DeliverymanForm({ match }) {
     async function loadDeliveryman() {
       const response = await api.get(`/deliverymen?id=${deliverymanId}`);
       formRef.current.setData(response.data);
+      console.log(response.data.avatar);
+      console.log(formRef.current.getData());
     }
 
     loadDeliveryman();
@@ -38,6 +42,7 @@ export default function DeliverymanForm({ match }) {
   }
 
   async function handleEditSubmit(data) {
+    console.log('data', data);
     try {
       await schema.validate(data, { abortEarly: false });
       await api.put(`/deliverymen/${deliverymanId}`, data);
@@ -88,9 +93,11 @@ export default function DeliverymanForm({ match }) {
 
       <Form
         ref={formRef}
+        initialData={deliveryman}
         onSubmit={editMode ? handleEditSubmit : handleCreateSubmit}
       >
-        <div className="avatar-input">JD</div>
+        {/* <div className="avatar-input">JD</div> */}
+        <AvatarInput name="avatar_id" />
 
         <label htmlFor="name">
           <span>Nome</span>

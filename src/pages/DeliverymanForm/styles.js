@@ -32,22 +32,6 @@ export const Form = styled(Unform)`
   padding: 30px;
   background: #fff padding-box;
 
-  div.avatar-input {
-    margin: 0 auto;
-    margin-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed #ccc;
-    background: #eee;
-    color: #ccc;
-    font-size: 66px;
-    width: 148px;
-    height: 148px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
   label {
     margin-bottom: 18px;
     width: 100%;
