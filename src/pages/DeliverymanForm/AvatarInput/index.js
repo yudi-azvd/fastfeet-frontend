@@ -8,11 +8,11 @@ import { Container, ImageCrop, DefaultAvatarPreview } from './styles';
 
 export default function AvatarInput({ ...rest }) {
   const inputRef = useRef(null);
-  const { registerField, defaultValue: defaultPreview } = useField('avatar');
-  // console.log('DEFAULT 1', defaultPreview);
-  console.log('DEFAULT 2', defaultPreview && defaultPreview.url);
-  const p = defaultPreview && defaultPreview.url;
-  const [preview, setPreview] = useState(defaultPreview && defaultPreview.url);
+  const { registerField, defaultValue } = useField('avatar');
+  console.log('DEFAULT 1', defaultValue);
+  console.log('DEFAULT 2', defaultValue && defaultValue.url);
+  const p = defaultValue && defaultValue.url;
+  const [preview, setPreview] = useState(defaultValue && defaultValue.url);
   // const [preview, setPreview] = useState('string');
   // const [preview, setPreview] = useState(p);
   // console.log('PREVIEW USESTATE', preview);
@@ -73,10 +73,10 @@ export default function AvatarInput({ ...rest }) {
       setValue(_, value) {
         setFileId(value);
         // console.log('regField setValue', defaultPreview);
-        setPreview(defaultPreview);
+        setPreview(defaultValue);
       },
     });
-  }, [defaultPreview, registerField]);
+  }, [defaultValue, registerField]);
 
   return (
     <Container>
