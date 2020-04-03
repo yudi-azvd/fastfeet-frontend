@@ -28,11 +28,10 @@ export default function DeliverymanForm({ match }) {
 
   useEffect(() => {
     async function loadDeliveryman() {
-      const response = await api.get(`/deliverymen?id=${deliverymanId}`);
-      // formRef.current.setData(response.data);
-      setDeliveryman(response.data);
-      console.log(response.data);
-      console.log(formRef.current.getData());
+      const { data } = await api.get(`/deliverymen?id=${deliverymanId}`);
+      formRef.current.setData(data);
+      // setDeliveryman({ ...data, avatar_id: data.avatar.id });
+      console.log(data);
     }
 
     loadDeliveryman();
@@ -94,7 +93,7 @@ export default function DeliverymanForm({ match }) {
 
       <Form
         ref={formRef}
-        initialData={deliveryman}
+        // initialData={deliveryman}
         onSubmit={editMode ? handleEditSubmit : handleCreateSubmit}
       >
         {/* <div className="avatar-input">JD</div> */}

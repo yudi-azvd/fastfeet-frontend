@@ -11,7 +11,7 @@ import history from '../../services/history';
 import { Container, DeliverymenList, DeliverymanItem } from './styles';
 
 import CreateButton from '../../components/CreateButton';
-import DefaultAvatar from '../../components/DefaultAvatar';
+import MiniDefaultAvatar from '../../components/MiniDefaultAvatar';
 import ActionsDropdown from '../../components/ActionsDropdown';
 
 const colors = [
@@ -99,7 +99,7 @@ export default function Deliverymen() {
                     alt="imagem de perfil"
                   />
                 ) : (
-                  <DefaultAvatar
+                  <MiniDefaultAvatar
                     initials={d.name[0]}
                     color={colors[index % colors.length]}
                   />

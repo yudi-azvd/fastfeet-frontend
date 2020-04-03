@@ -8,12 +8,15 @@ import { Container, ImageCrop, DefaultAvatarPreview } from './styles';
 
 export default function AvatarInput({ ...rest }) {
   const inputRef = useRef(null);
-  const { registerField, defaultValue } = useField('avatar');
-  console.log('DEFAULT 1', defaultValue);
-  console.log('DEFAULT 2', defaultValue && defaultValue.url);
-  const [preview, setPreview] = useState(defaultValue && defaultValue.url);
+  const { registerField, defaultValue: defaultPreview } = useField('avatar');
+  // console.log('DEFAULT 1', defaultPreview);
+  console.log('DEFAULT 2', defaultPreview && defaultPreview.url);
+  const p = defaultPreview && defaultPreview.url;
+  const [preview, setPreview] = useState(defaultPreview && defaultPreview.url);
   // const [preview, setPreview] = useState('string');
-  console.log('PREVIEW USESTATE', preview);
+  // const [preview, setPreview] = useState(p);
+  // console.log('PREVIEW USESTATE', preview);
+  // console.log('               P', p);
   const [fileId, setFileId] = useState(null);
 
   // const handlePreview = useCallback(event => {
@@ -36,42 +39,49 @@ export default function AvatarInput({ ...rest }) {
     const file = event.target.files ? event.target.files[0] : null;
     const previewURL = URL.createObjectURL(file);
 
-    data.append('file', file);
-
-    const response = await api.post('/files', data);
-    const { id } = response.data;
-
-    setFileId(id);
-
     if (!file) {
       setPreview(null);
     } else {
-      console.log('else set preview', previewURL);
+      // console.log('run setPreview: else set previewURL=>', previewURL);
       setPreview(previewURL);
+
+      data.append('file', file);
+
+      const response = await api.post('/files', data);
+      const { id } = response.data;
+
+      setFileId(id);
     }
   }
 
   useEffect(() => {
+    // console.log('run update on preview', preview);
+  });
+
+  useEffect(() => {
+    // console.log('run registerField');
+    // console.log('                 ', defaultPreview);
     registerField({
       name: 'avatar_id',
       ref: inputRef.current,
       path: 'dataset.file',
-      // path: 'files[0]',
       clearValue(ref) {
         ref.value = '';
+        setFileId(null);
         setPreview(null);
       },
       setValue(_, value) {
-        console.log('setValue', _, value);
-        setPreview(value);
+        setFileId(value);
+        // console.log('regField setValue', defaultPreview);
+        setPreview(defaultPreview);
       },
     });
-  }, [registerField]);
+  }, [defaultPreview, registerField]);
 
   return (
     <Container>
       <label className="avatar" htmlFor="avatar">
-        {console.log('PREVIEW:', preview)}
+        {console.log('RENDER PREVIEW:', preview)}
         {preview ? (
           <ImageCrop>
             <img src={preview} alt="Preview" width="200" />
