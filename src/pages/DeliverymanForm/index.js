@@ -30,8 +30,7 @@ export default function DeliverymanForm({ match }) {
     async function loadDeliveryman() {
       const { data } = await api.get(`/deliverymen?id=${deliverymanId}`);
       // formRef.current.setData(data);
-      setDeliveryman({ ...data, url: data.avatar.url });
-      console.log(data);
+      setDeliveryman(data);
     }
 
     loadDeliveryman();
@@ -42,7 +41,6 @@ export default function DeliverymanForm({ match }) {
   }
 
   async function handleEditSubmit(data) {
-    console.log('data', data);
     try {
       await schema.validate(data, { abortEarly: false });
       await api.put(`/deliverymen/${deliverymanId}`, data);
@@ -96,7 +94,6 @@ export default function DeliverymanForm({ match }) {
         initialData={deliveryman}
         onSubmit={editMode ? handleEditSubmit : handleCreateSubmit}
       >
-        {/* <div className="avatar-input">JD</div> */}
         <AvatarInput name="avatar_id" />
 
         <label htmlFor="name">

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
 
@@ -6,32 +6,18 @@ import api from '../../../services/api';
 
 import { Container, ImageCrop, DefaultAvatarPreview } from './styles';
 
+/** ???
+ * useState(defaultValue && defaultValue.url) não causa a devida
+ * re-renderização, apesar de se for passado um valor literal, como
+ * uma string, aí dá certo.
+ *
+ * Tem como fazer dar certo sem o primeiro useEffect?
+ */
 export default function AvatarInput({ ...rest }) {
   const inputRef = useRef(null);
   const { registerField, defaultValue } = useField('avatar');
-  console.log('DEFAULT 1', defaultValue);
-  console.log('DEFAULT 2', defaultValue && defaultValue.url);
-  const p = defaultValue && defaultValue.url;
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
-  // const [preview, setPreview] = useState('string');
-  // const [preview, setPreview] = useState(p);
-  // console.log('PREVIEW USESTATE', preview);
-  // console.log('               P', p);
   const [fileId, setFileId] = useState(null);
-
-  // const handlePreview = useCallback(event => {
-  //   console.log('HANDLE PREVIEW');
-  //   const file = event.target.files ? event.target.files[0] : null;
-
-  //   if (!file) {
-  //     setPreview(null);
-  //   }
-  //   console.log('FILE', file);
-  //   const previewURL = URL.createObjectURL(file);
-  //   console.log('Prev url:', previewURL);
-
-  //   setPreview(previewURL);
-  // }, []);
 
   async function handleChange(event) {
     const data = new FormData();
@@ -42,7 +28,6 @@ export default function AvatarInput({ ...rest }) {
     if (!file) {
       setPreview(null);
     } else {
-      // console.log('run setPreview: else set previewURL=>', previewURL);
       setPreview(previewURL);
 
       data.append('file', file);
@@ -55,12 +40,12 @@ export default function AvatarInput({ ...rest }) {
   }
 
   useEffect(() => {
-    // console.log('run update on preview', preview);
-  });
+    if (defaultValue) {
+      setPreview(defaultValue.url);
+    }
+  }, [defaultValue]);
 
   useEffect(() => {
-    // console.log('run registerField');
-    // console.log('                 ', defaultPreview);
     registerField({
       name: 'avatar_id',
       ref: inputRef.current,
@@ -72,8 +57,7 @@ export default function AvatarInput({ ...rest }) {
       },
       setValue(_, value) {
         setFileId(value);
-        // console.log('regField setValue', defaultPreview);
-        setPreview(defaultValue);
+        setPreview(defaultValue.url);
       },
     });
   }, [defaultValue, registerField]);
@@ -81,7 +65,6 @@ export default function AvatarInput({ ...rest }) {
   return (
     <Container>
       <label className="avatar" htmlFor="avatar">
-        {console.log('RENDER PREVIEW:', preview)}
         {preview ? (
           <ImageCrop>
             <img src={preview} alt="Preview" width="200" />
