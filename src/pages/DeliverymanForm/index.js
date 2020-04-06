@@ -45,6 +45,7 @@ export default function DeliverymanForm({ match }) {
       await schema.validate(data, { abortEarly: false });
       await api.put(`/deliverymen/${deliverymanId}`, data);
       toast.success('Entregador atualizado com sucesso!');
+      formRef.current.setErrors({});
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const validationErrors = {};
@@ -64,6 +65,8 @@ export default function DeliverymanForm({ match }) {
       await schema.validate(data, { abortEarly: false });
       await api.post(`/deliverymen`, data);
       toast.success('Entregador atualizado com sucesso!');
+      // devia ser redirecionado pra listagem?
+      formRef.current.setErrors({});
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const validationErrors = {};
