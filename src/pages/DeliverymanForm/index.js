@@ -17,6 +17,7 @@ export default function DeliverymanForm({ match }) {
   const [deliveryman, setDeliveryman] = useState(null);
   const { id: deliverymanId } = match.params;
   const editMode = match.path.endsWith('/edit');
+  console.log(editMode);
   const schema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Nome com 3 letras no mínimo.')
@@ -84,7 +85,7 @@ export default function DeliverymanForm({ match }) {
         <h1>{editMode ? 'Edição de entregador' : 'Cadastro de entregador'}</h1>
 
         <div className="buttons">
-          <GoBackButton to="/deliveries" />
+          <GoBackButton to="/deliverymen" />
           <SaveButton onClick={() => submitForm()} />
         </div>
       </header>
@@ -94,7 +95,7 @@ export default function DeliverymanForm({ match }) {
         initialData={deliveryman}
         onSubmit={editMode ? handleEditSubmit : handleCreateSubmit}
       >
-        <AvatarInput name="avatar_id" />
+        <AvatarInput name="avatar_id" editMode={editMode} />
 
         <label htmlFor="name">
           <span>Nome</span>

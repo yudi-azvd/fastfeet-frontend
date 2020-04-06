@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 
 export const Container = styled.div`
@@ -45,17 +45,31 @@ export const DefaultAvatarPreview = styled.div`
   font-weight: normal;
   margin: 0 auto;
   margin-bottom: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px dashed #6e29e4;
-  background: ${lighten(0.35, '#6e29e4')};
-  color: #6e29e4;
-  font-size: 66px;
   width: 148px;
   height: 148px;
   border-radius: 50%;
   opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${props =>
+    props.editMode
+      ? css`
+          border: 2px dashed #6e29e4;
+          background: ${lighten(0.35, '#6e29e4')};
+          color: #6e29e4;
+          font-size: 66px;
+        `
+      : css`
+          border: 2px dashed #ddd;
+          flex-direction: column;
+          color: #ddd;
+        `}
+
+  span {
+    font-size: 16px;
+  }
 
   transition: opacity 0.2s;
 

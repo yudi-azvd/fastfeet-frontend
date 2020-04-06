@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
+import { MdInsertPhoto } from 'react-icons/md';
 
 import api from '../../../services/api';
 
@@ -13,7 +14,7 @@ import { Container, ImageCrop, DefaultAvatarPreview } from './styles';
  *
  * Tem como fazer dar certo sem o primeiro useEffect?
  */
-export default function AvatarInput({ ...rest }) {
+export default function AvatarInput({ editMode = false, ...rest }) {
   const inputRef = useRef(null);
   // Acho que seria melhor se fosse defaultPreview, talvez defaultAvatarPreviewUrl
   const { registerField, defaultValue } = useField('avatar');
@@ -64,8 +65,6 @@ export default function AvatarInput({ ...rest }) {
     });
   }, [defaultValue, registerField]);
 
-  console.log(preview);
-
   return (
     <Container>
       <label className="avatar" htmlFor="avatar">
@@ -74,7 +73,16 @@ export default function AvatarInput({ ...rest }) {
             <img src={preview} alt="Preview" width="200" />
           </ImageCrop>
         ) : (
-          <DefaultAvatarPreview>JD</DefaultAvatarPreview>
+          <DefaultAvatarPreview editMode={editMode}>
+            {editMode ? (
+              'JD'
+            ) : (
+              <>
+                <MdInsertPhoto size={39.64} color="#ddd" />
+                <span>Adicionar foto</span>
+              </>
+            )}
+          </DefaultAvatarPreview>
         )}
 
         <input
@@ -92,4 +100,9 @@ export default function AvatarInput({ ...rest }) {
 
 AvatarInput.propTypes = {
   name: PropTypes.string.isRequired,
+  editMode: PropTypes.bool,
+};
+
+AvatarInput.defaultProps = {
+  editMode: false,
 };
