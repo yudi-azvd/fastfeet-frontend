@@ -45,6 +45,7 @@ export const Content = styled.div`
         border: 1px solid #ddd;
         border-radius: 4px;
         color: #999;
+        width: 100%;
       }
     }
 
