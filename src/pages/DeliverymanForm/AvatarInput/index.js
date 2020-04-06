@@ -7,14 +7,15 @@ import api from '../../../services/api';
 import { Container, ImageCrop, DefaultAvatarPreview } from './styles';
 
 /** ???
- * useState(defaultValue && defaultValue.url) não causa a devida
- * re-renderização, apesar de se for passado um valor literal, como
- * uma string, aí dá certo.
+ * useState(defaultValue && defaultValue.url) não causa a "devida"
+ * re-renderização, apesar de que se for passado um valor literal,
+ * como uma string, aí dá certo.
  *
  * Tem como fazer dar certo sem o primeiro useEffect?
  */
 export default function AvatarInput({ ...rest }) {
   const inputRef = useRef(null);
+  // Acho que seria melhor se fosse defaultPreview, talvez defaultAvatarPreviewUrl
   const { registerField, defaultValue } = useField('avatar');
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
   const [fileId, setFileId] = useState(null);
@@ -56,11 +57,14 @@ export default function AvatarInput({ ...rest }) {
         setPreview(null);
       },
       setValue(_, value) {
+        // Acho que isso nem é executado nesse caso.
         setFileId(value);
         setPreview(defaultValue.url);
       },
     });
   }, [defaultValue, registerField]);
+
+  console.log(preview);
 
   return (
     <Container>
