@@ -17,7 +17,6 @@ export default function DeliverymanForm({ match }) {
   const [deliveryman, setDeliveryman] = useState(null);
   const { id: deliverymanId } = match.params;
   const editMode = match.path.endsWith('/edit');
-  console.log(editMode);
   const schema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Nome com 3 letras no mínimo.')
