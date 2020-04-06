@@ -19,10 +19,10 @@ export default function DeliverymanForm({ match }) {
   const editMode = match.path.endsWith('/edit');
   const schema = Yup.object().shape({
     name: Yup.string()
-      .min(3, 'Nome com 3 letras no mínimo.')
-      .required(),
+      .min(3, 'O Nome com 3 letras no mínimo.')
+      .required('O nome é obrigatório.'),
     email: Yup.string()
-      .email()
+      .email('O email deve ser um email válido.')
       .required('O email é obrigatório.'),
   });
 
