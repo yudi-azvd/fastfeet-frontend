@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
   align-self: center;
@@ -47,9 +48,9 @@ export const DefaultAvatarPreview = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px dashed #ccc;
-  background: #eee;
-  color: #ccc;
+  border: 2px dashed #6e29e4;
+  background: ${lighten(0.35, '#6e29e4')};
+  color: #6e29e4;
   font-size: 66px;
   width: 148px;
   height: 148px;
