@@ -12,6 +12,8 @@ import DeliveryForm from '../pages/DeliveryForm';
 import Deliverymen from '../pages/Deliverymen';
 import DeliverymanForm from '../pages/DeliverymanForm';
 
+import Recipients from '../pages/Recipients';
+
 import NotFound from '../pages/NotFound';
 
 export default function Routes() {
@@ -33,6 +35,8 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/deliverymen/new" component={DeliverymanForm} isPrivate />
+
+      <Route exact path="/recipients" component={Recipients} isPrivate />
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} isPrivate />
