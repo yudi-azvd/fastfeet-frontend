@@ -33,6 +33,21 @@ export default function Recipients() {
     loadRecipients();
   }, []);
 
+  useEffect(() => {
+    async function loadRecipientsWithQuery() {
+      const response = await api.get(`/recipients?q=${recipientQuery}`);
+      setRecipients(
+        response.data.map(r => ({
+          ...r,
+          address: `${r.state}, ${r.city}, ${r.street}, ${r.number}`,
+        }))
+      );
+    }
+    if (recipientQuery) {
+      loadRecipientsWithQuery();
+    }
+  }, [recipientQuery]);
+
   function handleRecipientQueryChange(event) {
     setRecipientQuery(event.target.value);
   }
