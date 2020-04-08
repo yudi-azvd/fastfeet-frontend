@@ -77,7 +77,7 @@ export const DeliverymanItem = memo(styled.li`
     align-items: center;
     justify-content: left;
 
-    span.default-avatar {
+    /* span.default-avatar {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -92,7 +92,7 @@ export const DeliverymanItem = memo(styled.li`
       height: 35px;
       border-radius: 50%;
       margin-right: 5px;
-    }
+    } */
   }
 
   div.status {
