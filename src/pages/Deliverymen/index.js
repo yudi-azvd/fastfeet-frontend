@@ -11,7 +11,7 @@ import history from '../../services/history';
 import { Container, DeliverymenList, DeliverymanItem } from './styles';
 
 import CreateButton from '../../components/CreateButton';
-import MiniDefaultAvatar from '../../components/MiniDefaultAvatar';
+import MiniAvatar from '../../components/MiniAvatar';
 import ActionsDropdown from '../../components/ActionsDropdown';
 
 const colors = [
@@ -93,17 +93,10 @@ export default function Deliverymen() {
             <DeliverymanItem key={`deliveryman-${d.id}`}>
               <div> #{d.id} </div>
               <div className="avatar">
-                {d.avatar ? (
-                  <img // aí vem a URL do avatar
-                    src="https://api.adorable.io/avatars/40/abott@adorable.png"
-                    alt="imagem de perfil"
-                  />
-                ) : (
-                  <MiniDefaultAvatar
-                    initials={d.name[0]}
-                    color={colors[index % colors.length]}
-                  />
-                )}
+                <MiniAvatar
+                  deliveryman={d}
+                  color={colors[index % colors.length]}
+                />
               </div>
               <div>
                 <span>{d.name} </span>
