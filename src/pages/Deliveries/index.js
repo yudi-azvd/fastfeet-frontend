@@ -12,7 +12,7 @@ import history from '../../services/history';
 import { Container, DeliveriesList, DeliveryItem, Modal } from './styles';
 
 import CreateButton from '../../components/CreateButton';
-import MiniDefaultAvatar from '../../components/MiniDefaultAvatar';
+import MiniAvatar from '../../components/MiniAvatar';
 import DeliveryStatus from '../../components/DeliveryStatus';
 import ActionsDropdown from '../../components/ActionsDropdown';
 
@@ -131,7 +131,7 @@ export default function Deliveries() {
                       alt="imagem de perfil"
                     />
                   ) : (
-                    <MiniDefaultAvatar
+                    <MiniAvatar
                       initials={d.deliveryman.name[0]}
                       color={colors[index % colors.length]}
                     />
