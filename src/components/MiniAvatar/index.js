@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function MiniDefaultAvatar({ deliveryman, color }) {
+export default function MiniAvatar({ deliveryman, color }) {
   return (
     <Container color={color}>
       {deliveryman.avatar_id ? (
@@ -15,7 +15,7 @@ export default function MiniDefaultAvatar({ deliveryman, color }) {
   );
 }
 
-MiniDefaultAvatar.propTypes = {
+MiniAvatar.propTypes = {
   color: PropTypes.string.isRequired,
   deliveryman: PropTypes.shape({
     name: PropTypes.string,
@@ -26,7 +26,7 @@ MiniDefaultAvatar.propTypes = {
   }),
 };
 
-MiniDefaultAvatar.defaultProps = {
+MiniAvatar.defaultProps = {
   deliveryman: PropTypes.shape({
     avatar_id: 0,
   }),
