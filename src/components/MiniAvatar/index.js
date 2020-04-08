@@ -7,7 +7,9 @@ export default function MiniAvatar({ deliveryman, color }) {
   return (
     <Container color={color}>
       {deliveryman.avatar_id ? (
-        <img src={deliveryman.avatar.url} alt="imagem de perfil" />
+        <div>
+          <img src={deliveryman.avatar.url} alt="imagem de perfil" width="40" />
+        </div>
       ) : (
         <span> {deliveryman.name.slice(0, 2)} </span>
       )}
