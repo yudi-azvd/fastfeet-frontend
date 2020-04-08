@@ -127,7 +127,6 @@ export default function Deliveries() {
                 <div className="avatar">
                   <MiniAvatar
                     deliveryman={d.deliveryman}
-                    initials={d.deliveryman.name[0]}
                     color={colors[index % colors.length]}
                   />
                   <span>
