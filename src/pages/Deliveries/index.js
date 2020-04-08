@@ -125,17 +125,11 @@ export default function Deliveries() {
                 <div> #{d.id} </div>
                 <div> {d.recipient.name} </div>
                 <div className="avatar">
-                  {d.deliveryman.avatar ? (
-                    <img // aí vem a URL do avatar
-                      src="https://api.adorable.io/avatars/40/abott@adorable.png"
-                      alt="imagem de perfil"
-                    />
-                  ) : (
-                    <MiniDefaultAvatar
-                      initials={d.deliveryman.name[0]}
-                      color={colors[index % colors.length]}
-                    />
-                  )}
+                  <MiniDefaultAvatar
+                    deliveryman={d.deliveryman}
+                    initials={d.deliveryman.name[0]}
+                    color={colors[index % colors.length]}
+                  />
                   <span>
                     {d.deliveryman.name.length > 15
                       ? `${d.deliveryman.name.slice(0, 8)}...`
