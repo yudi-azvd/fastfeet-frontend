@@ -73,29 +73,6 @@ export const DeliveryItem = memo(styled.li`
   margin-bottom: 21px;
   overflow-wrap: normal;
 
-  div.avatar {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-
-    span.default-avatar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-
-    img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-  }
-
   div.status {
     display: flex;
     justify-content: left;
