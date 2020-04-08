@@ -2,11 +2,21 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 
 export const Container = styled.div`
-  img {
+  div {
+    align-self: center;
     width: 35px;
     height: 35px;
     border-radius: 50%;
     border: 2px solid #7d40e7;
+    position: relative;
+    overflow: hidden;
+
+    /* DEMORA CONSIDERAVELMENTE PRA CARREGAR */
+    img {
+      margin: 0 auto;
+      height: 100%;
+      width: auto;
+    }
   }
 
   span {
