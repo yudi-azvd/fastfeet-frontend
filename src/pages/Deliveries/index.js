@@ -123,7 +123,9 @@ export default function Deliveries() {
               // https://dmitripavlutin.com/use-react-memo-wisely/
               <DeliveryItem key={`delivery-${d.id}`}>
                 <div> #{d.id} </div>
-                <div> {d.recipient.name} </div>
+                <div className="name">
+                  <p> {d.recipient.name} </p>
+                </div>
                 <div className="avatar">
                   <MiniAvatar
                     deliveryman={d.deliveryman}

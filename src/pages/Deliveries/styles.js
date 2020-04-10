@@ -63,15 +63,54 @@ export const DeliveryItem = memo(styled.li`
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
   padding: 0 28px;
 
-  /* aí quebra */
-  line-height: 57px;
-
   color: #666;
   background: #fff;
   border-radius: 4px;
   height: 57px;
   margin-bottom: 21px;
   overflow-wrap: normal;
+
+  div {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  div.name {
+    position: relative;
+    padding-right: 5px;
+
+    /* Sim, é muita bambiarra. Isso 
+    só pra ter um efeito de fade out. Não vale à pena */
+    &::before {
+      position: absolute;
+      content: '';
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+      background-image: linear-gradient(
+        to right,
+        transparent,
+        transparent,
+        white,
+        white,
+        white
+      );
+      background-position: 20px 20px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  div.avatar {
+    display: flex;
+    justify-content: flex-start;
+
+    div {
+      margin-right: 5px;
+    }
+  }
 
   div.status {
     display: flex;
@@ -83,8 +122,10 @@ export const DeliveryItem = memo(styled.li`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    overflow: visible;
 
     div.dropdown {
+      overflow: visible;
       display: flex;
       flex-direction: column;
       justify-content: center;
