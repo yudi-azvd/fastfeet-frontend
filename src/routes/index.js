@@ -39,6 +39,7 @@ export default function Routes() {
 
       <Route exact path="/recipients" component={Recipients} isPrivate />
       <Route path="/recipients/:id/edit" component={RecipientForm} isPrivate />
+      <Route path="/recipients/new" component={RecipientForm} isPrivate />
 
       {/* Essa rota é privada ou não? */}
       <Route path="*" component={NotFound} isPrivate />
