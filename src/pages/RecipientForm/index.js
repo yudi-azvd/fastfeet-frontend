@@ -47,7 +47,6 @@ export default function RecipientForm({ match }) {
     try {
       await schema.validate(data, { abortEarly: false });
       const response = await api.put(`/recipients/${recipient.id}`, data);
-      console.log(response);
       setRecipient(response.data);
       toast.success('Destinatário atualizado com sucesso!');
       formRef.current.setErrors({});
@@ -58,7 +57,6 @@ export default function RecipientForm({ match }) {
           validationErrors[err.path] = err.message;
         });
         formRef.current.setErrors(validationErrors);
-        // como tratar erros dos campos recipient_id e deliveryman_id???
         toast.error('Erro de validação. Verifique seus dados!');
       } else {
         toast.error(String(error));
