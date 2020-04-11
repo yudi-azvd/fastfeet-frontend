@@ -3,7 +3,7 @@ import { darken } from 'polished';
 
 export const Container = styled.ul`
   padding: 10px;
-  width: 150px;
+  min-width: 150px;
   border-radius: 4px;
   box-shadow: 0 0 2px #00000026;
   /* igual a: */
@@ -39,6 +39,7 @@ export const Container = styled.ul`
     font-size: 16px;
     border-bottom: 1px solid #eee;
     color: #999;
+    white-space: nowrap;
 
     &:last-child {
       border-bottom: 0;
@@ -46,7 +47,7 @@ export const Container = styled.ul`
 
     svg {
       margin-right: 8px;
-      width: 16px;
+      min-width: 16px;
       opacity: 0.8;
       transition: opacity 0.2s;
     }
