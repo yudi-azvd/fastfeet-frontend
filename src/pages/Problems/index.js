@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState, useEffect } from 'react';
@@ -32,14 +33,24 @@ export default function Problems() {
 
   function handleView() {}
 
-  function handleDelete() {}
+  function handleDelete(problemId) {
+    const yes = window.confirm(
+      `Tem certeza que deseja remover o problema #${problemId}?`
+    );
+
+    if (yes) {
+      api.delete(`/problem/${problemId}/cancel-delivery`);
+
+      setProblems(problems.filter(d => d.id !== problemId));
+    }
+  }
 
   return (
     <Container>
       <h1>Problemas nas entregas</h1>
 
       <div className="header">
-        <div>ID</div>
+        <div>Encomenda</div>
         <div>Descrição</div>
         <div className="actions">Ações</div>
       </div>
@@ -47,7 +58,7 @@ export default function Problems() {
       <ul>
         {problems.map(p => (
           <ProblemItem key={p.id}>
-            <div>#{p.id}</div>
+            <div>#{p.delivery_id}</div>
             <div>
               <p>{p.description}</p>
             </div>
