@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { MdDeleteForever, MdVisibility } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 
@@ -33,15 +34,17 @@ export default function Problems() {
 
   function handleView() {}
 
-  function handleDelete(problemId) {
+  async function handleDelete(deliveryId) {
     const yes = window.confirm(
-      `Tem certeza que deseja remover o problema #${problemId}?`
+      `Tem certeza que deseja cancelar a entrega #${deliveryId}?`
     );
 
     if (yes) {
-      api.delete(`/problem/${problemId}/cancel-delivery`);
+      await api.delete(`/problem/${deliveryId}/cancel-delivery`);
 
-      setProblems(problems.filter(d => d.id !== problemId));
+      // setProblems(problems.filter(d => d.id !== problemId));
+
+      toast.success('Entrega cancelada com sucesso!');
     }
   }
 
@@ -74,7 +77,7 @@ export default function Problems() {
                     <MdVisibility size={15} color="#8E5BE8" />
                     <span>Visualizar</span>
                   </li>
-                  <li onClick={() => handleDelete(p.id)}>
+                  <li onClick={() => handleDelete(p.delivery_id)}>
                     <MdDeleteForever size={16} color="#DE3B3B" />
                     <span>Cancelar encomenda</span>
                   </li>
