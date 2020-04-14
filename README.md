@@ -1,7 +1,9 @@
 # FastFeet
 Projeto final do Bootcamp da Rocketseat: um sistema para conectar entregadores e destinatários.
 
-<!-- ### Preview ### -->
+### Preview
+
+<img src="./.github/deliveries.png">
 
 ### Instalação
 Abra o terminal na sua máquina e execute:
