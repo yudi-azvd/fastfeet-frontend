@@ -5,6 +5,9 @@ Projeto final do Bootcamp da Rocketseat: um sistema para conectar entregadores e
 
 <img src="./.github/deliveries.png">
 
+### Backend
+Dê uma olhada [aqui](https://github.com/yudi-azvd/fastfeet-backend) para configurar o backend da aplicação.
+
 
 ### Instalação
 Abra o terminal na sua máquina e execute:
@@ -15,10 +18,6 @@ cd fastfeet-frontend
 yarn 
 yarn start
 ```
-
-### Backend
-Dê uma olhada [aqui](https://github.com/yudi-azvd/fastfeet-backend) para configurar o backend da aplicação.
-
 
 ### TODO's
 Confira [aqui](https://github.com/yudi-azvd/fastfeet-frontend/issues/1).
