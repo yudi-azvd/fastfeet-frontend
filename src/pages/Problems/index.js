@@ -8,12 +8,14 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 
-import { Container, ProblemItem } from './styles';
+import { Container, ProblemItem, Modal } from './styles';
 import ActionsDropdown from '../../components/ActionsDropdown';
 
 export default function Problems() {
   const [problems, setProblems] = useState([]);
   const [openProblemIdActions, setOpenProblemIdActions] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalRecipient, setModalRecipient] = useState({});
 
   useEffect(() => {
     async function loadProblems() {
@@ -32,7 +34,10 @@ export default function Problems() {
     }
   }
 
-  function handleView() {}
+  function handleView(p) {
+    setOpenModal(true);
+    setModalRecipient(p);
+  }
 
   async function handleDelete(deliveryId) {
     const yes = window.confirm(
@@ -49,44 +54,55 @@ export default function Problems() {
   }
 
   return (
-    <Container>
-      <h1>Problemas nas entregas</h1>
+    <>
+      <Container>
+        <h1>Problemas nas entregas</h1>
 
-      <div className="header">
-        <div>Encomenda</div>
-        <div>Descrição</div>
-        <div className="actions">Ações</div>
-      </div>
+        <div className="header">
+          <div>Encomenda</div>
+          <div>Descrição</div>
+          <div className="actions">Ações</div>
+        </div>
 
-      <ul>
-        {problems.map(p => (
-          <ProblemItem key={p.id}>
-            <div>#{p.delivery_id}</div>
-            <div>
-              <p>{p.description}</p>
-            </div>
-            <div className="actions">
-              <div className="dropdown">
-                <FiMoreHorizontal
-                  size={16}
-                  color="#666"
-                  onClick={() => toggelActionsVisibility(p.id)}
-                />
-                <ActionsDropdown open={p.id === openProblemIdActions}>
-                  <li onClick={() => handleView(p)}>
-                    <MdVisibility size={15} color="#8E5BE8" />
-                    <span>Visualizar</span>
-                  </li>
-                  <li onClick={() => handleDelete(p.delivery_id)}>
-                    <MdDeleteForever size={16} color="#DE3B3B" />
-                    <span>Cancelar encomenda</span>
-                  </li>
-                </ActionsDropdown>
+        <ul>
+          {problems.map(p => (
+            <ProblemItem key={p.id}>
+              <div>#{p.delivery_id}</div>
+              <div>
+                <p>{p.description}</p>
               </div>
-            </div>
-          </ProblemItem>
-        ))}
-      </ul>
-    </Container>
+              <div className="actions">
+                <div className="dropdown">
+                  <FiMoreHorizontal
+                    size={16}
+                    color="#666"
+                    onClick={() => toggelActionsVisibility(p.id)}
+                  />
+                  <ActionsDropdown open={p.id === openProblemIdActions}>
+                    <li onClick={() => handleView(p)}>
+                      <MdVisibility size={15} color="#8E5BE8" />
+                      <span>Visualizar</span>
+                    </li>
+                    <li onClick={() => handleDelete(p.delivery_id)}>
+                      <MdDeleteForever size={16} color="#DE3B3B" />
+                      <span>Cancelar encomenda</span>
+                    </li>
+                  </ActionsDropdown>
+                </div>
+              </div>
+            </ProblemItem>
+          ))}
+        </ul>
+      </Container>
+
+      {openModal && (
+        <Modal open={openModal} close={() => setOpenModal(false)}>
+          <h2>PROBLEMA</h2>
+          <div>
+            <p>{modalRecipient.description}</p>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 }

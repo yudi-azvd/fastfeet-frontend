@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import BasicModal from '../../components/BasicModal';
+
 export const Container = styled.div`
   margin: 30px 10%;
 
@@ -63,5 +65,18 @@ export const ProblemItem = styled.li`
     svg {
       cursor: pointer;
     }
+  }
+`;
+
+export const Modal = styled(BasicModal)`
+  h2 {
+    color: #444;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666;
   }
 `;
