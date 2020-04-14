@@ -111,7 +111,7 @@ export default function Deliverymen() {
                   />
                   <ActionsDropdown open={d.id === openDeliverymanActionsId}>
                     <li onClick={() => handleEdit(d.id)}>
-                      <MdEdit size={15} color="#8E5BE8" />
+                      <MdEdit size={15} color="#4D85EE" />
                       <span>Editar</span>
                     </li>
                     <li onClick={() => handleDelete(d)}>
